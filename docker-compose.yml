@@ -19,7 +19,7 @@ services:
     container_name: postgres
     image: postgres
     volumes:
-      - ./initdb:/docker-entrypoint-initdb.d
+      - ./scripts:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
     environment:
