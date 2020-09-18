@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_NAME: Main Org.
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Editor
+      GF_INSTALL_PLUGINS: grafana-worldmap-panel, grafana-piechart-panel, marcuscalidus-svg-panel, simpod-json-datasource
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - "3000:3000"
+
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: grafana
+
+# docker cp /Users/alessio/Downloads/aziende_agricole.csv postgres:/
+# create table aziende(municipio int, indirizzo varchar(255), indirizzob varchar(255), superficie float);
+# \COPY aziende FROM 'aziende_agricole.csv' DELIMITER ',' CSV HEADER;
