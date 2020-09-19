@@ -15,156 +15,21 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1600516996838,
-  "links": [],
-  "panels": [
+  "iteration": 1600522976198,
+  "links": [
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Postgres",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 0
-      },
-      "hiddenSeries": false,
-      "id": 7,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pluginVersion": "7.1.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [
-            {
-              "params": [
-                "starttimestamp"
-              ],
-              "type": "column"
-            }
-          ],
-          "metricColumn": "municipio",
-          "rawQuery": true,
-          "rawSql": "SELECT \n  starttimestamp AS time,\n  municipio,\n  (sum(upload)::float / 1000000::float) AS upload,\n  (sum(download)::float / 1000000::float) AS download\nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\nGROUP BY starttimestamp,municipio;",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "download"
-                ],
-                "type": "column"
-              },
-              {
-                "params": [
-                  "sum"
-                ],
-                "type": "aggregate"
-              },
-              {
-                "params": [
-                  "download"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "upload"
-                ],
-                "type": "column"
-              },
-              {
-                "params": [
-                  "sum"
-                ],
-                "type": "aggregate"
-              },
-              {
-                "params": [
-                  "upload"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "table": "connessioni",
-          "timeColumn": "starttimestamp",
-          "timeColumnType": "timestamptz",
-          "where": []
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Panel Title",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
+      "$$hashKey": "object:245",
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Dashboards",
+      "type": "dashboards"
+    }
+  ],
+  "panels": [
     {
       "datasource": null,
       "fieldConfig": {
@@ -177,7 +42,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 0
       },
       "id": 5,
       "options": {
@@ -212,7 +77,7 @@
         "h": 15,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 4
       },
       "hideEmpty": true,
       "hideZero": true,
@@ -300,7 +165,7 @@
         "h": 15,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 4
       },
       "hideEmpty": true,
       "hideZero": true,
@@ -377,14 +242,10 @@
           "selected": true,
           "tags": [],
           "text": [
-            "Municipio I",
-            "Municipio IX",
-            "Municipio II"
+            "Municipio I"
           ],
           "value": [
-            "Municipio I",
-            "Municipio IX",
-            "Municipio II"
+            "Municipio I"
           ]
         },
         "datasource": "Postgres",
@@ -406,7 +267,7 @@
             "value": "Municipio I"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio II",
             "value": "Municipio II"
           },
@@ -421,7 +282,7 @@
             "value": "Municipio IV"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio IX",
             "value": "Municipio IX"
           },
@@ -490,43 +351,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [
-            "Piazza Giovanni Agnelli, 10, Roma",
-            "Via Cristoforo Colombo, 570, Roma",
-            "Via Giovanni Frignani, 97, Roma",
-            "Via Ignazio  Silone, 100, Roma",
-            "Via Luigi Chiarini, 400, Roma",
-            "Via Paolo Renzi, 47, Roma",
-            "Via Santi Savarino, 16, Roma",
-            "Via del Turismo, 30/32, Roma",
-            "Via di Decima, 96/102, Roma",
-            "Viale Africa, 109, Roma",
-            "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
-            "Viale dell'Oceano Indiano, 64, Roma",
-            "Viale dell'Oceano Pacifico, 83, Roma",
-            "Viale della Civilta del Lavoro, 10, Roma",
-            "Viale della CiviltÃ  del Lavoro, 10, Roma",
-            "Viale della Previdenza Sociale, 20, Roma"
-          ],
-          "value": [
-            "Piazza Giovanni Agnelli, 10, Roma",
-            "Via Cristoforo Colombo, 570, Roma",
-            "Via Giovanni Frignani, 97, Roma",
-            "Via Ignazio  Silone, 100, Roma",
-            "Via Luigi Chiarini, 400, Roma",
-            "Via Paolo Renzi, 47, Roma",
-            "Via Santi Savarino, 16, Roma",
-            "Via del Turismo, 30/32, Roma",
-            "Via di Decima, 96/102, Roma",
-            "Viale Africa, 109, Roma",
-            "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
-            "Viale dell'Oceano Indiano, 64, Roma",
-            "Viale dell'Oceano Pacifico, 83, Roma",
-            "Viale della Civilta del Lavoro, 10, Roma",
-            "Viale della CiviltÃ  del Lavoro, 10, Roma",
-            "Viale della Previdenza Sociale, 20, Roma"
-          ]
+          "selected": false,
+          "text": "Circonvallazione Trionfale, 19, Roma",
+          "value": "Circonvallazione Trionfale, 19, Roma"
         },
         "datasource": "Postgres",
         "definition": "select posizione from connessioni where municipio in ($municipio) group by posizione;",
@@ -537,7 +364,7 @@
         "name": "sede",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "Circonvallazione Trionfale, 19, Roma",
             "value": "Circonvallazione Trionfale, 19, Roma"
           },
@@ -557,19 +384,9 @@
             "value": "Piazza Di Porta Metronia, 2, Roma"
           },
           {
-            "selected": true,
-            "text": "Piazza Giovanni Agnelli, 10, Roma",
-            "value": "Piazza Giovanni Agnelli, 10, Roma"
-          },
-          {
             "selected": false,
             "text": "Piazza Giuseppe Mazzini, 41, Roma",
             "value": "Piazza Giuseppe Mazzini, 41, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Piazza Grecia, 23/25, Roma",
-            "value": "Piazza Grecia, 23/25, Roma"
           },
           {
             "selected": false,
@@ -613,21 +430,6 @@
           },
           {
             "selected": false,
-            "text": "Via Campania, 63, Roma",
-            "value": "Via Campania, 63, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Cristoforo Colombo, 570, Roma",
-            "value": "Via Cristoforo Colombo, 570, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Dire Daua, 11, Roma",
-            "value": "Via Dire Daua, 11, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Ennio Quirino Visconti, 13, Roma",
             "value": "Via Ennio Quirino Visconti, 13, Roma"
           },
@@ -642,29 +444,9 @@
             "value": "Via Gabriele Camozzi, 8, Roma"
           },
           {
-            "selected": true,
-            "text": "Via Giovanni Frignani, 97, Roma",
-            "value": "Via Giovanni Frignani, 97, Roma"
-          },
-          {
             "selected": false,
             "text": "Via Giulia, 25, Roma",
             "value": "Via Giulia, 25, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Goito, 35, Roma",
-            "value": "Via Goito, 35, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Ignazio  Silone, 100, Roma",
-            "value": "Via Ignazio  Silone, 100, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Luigi Chiarini, 400, Roma",
-            "value": "Via Luigi Chiarini, 400, Roma"
           },
           {
             "selected": false,
@@ -683,38 +465,8 @@
           },
           {
             "selected": false,
-            "text": "Via Nomentana, 70, Roma",
-            "value": "Via Nomentana, 70, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Paolo Renzi, 47, Roma",
-            "value": "Via Paolo Renzi, 47, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Santi Savarino, 16, Roma",
-            "value": "Via Santi Savarino, 16, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Savoia, 13, Roma",
-            "value": "Via Savoia, 13, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Tiburtina Antica, 25, Roma",
-            "value": "Via Tiburtina Antica, 25, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Trionfale, 45, Roma",
             "value": "Via Trionfale, 45, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Ulisse Aldrovandi, 18, Roma",
-            "value": "Via Ulisse Aldrovandi, 18, Roma"
           },
           {
             "selected": false,
@@ -742,11 +494,6 @@
             "value": "Via del Tritone, 142, Roma"
           },
           {
-            "selected": true,
-            "text": "Via del Turismo, 30/32, Roma",
-            "value": "Via del Turismo, 30/32, Roma"
-          },
-          {
             "selected": false,
             "text": "Via della Consolazione, 4, Roma",
             "value": "Via della Consolazione, 4, Roma"
@@ -762,54 +509,14 @@
             "value": "Via delle Tre Pile, 1, Roma"
           },
           {
-            "selected": true,
-            "text": "Via di Decima, 96/102, Roma",
-            "value": "Via di Decima, 96/102, Roma"
-          },
-          {
             "selected": false,
             "text": "Via di Monte Tarpeo, 41, Roma",
             "value": "Via di Monte Tarpeo, 41, Roma"
           },
           {
-            "selected": true,
-            "text": "Viale Africa, 109, Roma",
-            "value": "Viale Africa, 109, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
-            "value": "Viale dei Caduti nella Guerra di Liberazione, 258, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Viale dell'Oceano Indiano, 64, Roma",
-            "value": "Viale dell'Oceano Indiano, 64, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Viale dell'Oceano Pacifico, 83, Roma",
-            "value": "Viale dell'Oceano Pacifico, 83, Roma"
-          },
-          {
             "selected": false,
             "text": "Viale dell'Uccelliera, 1, Roma",
             "value": "Viale dell'Uccelliera, 1, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Viale della Civilta del Lavoro, 10, Roma",
-            "value": "Viale della Civilta del Lavoro, 10, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Viale della CiviltÃ  del Lavoro, 10, Roma",
-            "value": "Viale della CiviltÃ  del Lavoro, 10, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Viale della Previdenza Sociale, 20, Roma",
-            "value": "Viale della Previdenza Sociale, 20, Roma"
           },
           {
             "selected": false,
@@ -831,8 +538,8 @@
     ]
   },
   "time": {
-    "from": "2020-06-24T00:00:00.000Z",
-    "to": "2020-06-27T23:59:59.000Z"
+    "from": "2020-06-01T00:00:00.000Z",
+    "to": "2020-08-31T23:59:59.000Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -849,7 +556,7 @@
     ]
   },
   "timezone": "utc",
-  "title": "Roma open data",
-  "uid": "xkQNiBdMz",
+  "title": "Geo dashboard",
+  "uid": "home",
   "version": 1
 }

@@ -8,7 +8,7 @@ services:
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_NAME: Main Org.
       GF_AUTH_ANONYMOUS_ORG_ROLE: Editor
-      GF_INSTALL_PLUGINS: grafana-worldmap-panel, grafana-piechart-panel, marcuscalidus-svg-panel, simpod-json-datasource
+      GF_INSTALL_PLUGINS: grafana-worldmap-panel, grafana-piechart-panel, marcusolsson-hourly-heatmap-panel
     volumes:
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     ports:
