@@ -15,9 +15,156 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1600515593854,
+  "iteration": 1600516996838,
   "links": [],
   "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "starttimestamp"
+              ],
+              "type": "column"
+            }
+          ],
+          "metricColumn": "municipio",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  municipio,\n  (sum(upload)::float / 1000000::float) AS upload,\n  (sum(download)::float / 1000000::float) AS download\nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\nGROUP BY starttimestamp,municipio;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "download"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "download"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "upload"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "upload"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "connessioni",
+          "timeColumn": "starttimestamp",
+          "timeColumnType": "timestamptz",
+          "where": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Panel Title",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
     {
       "datasource": null,
       "fieldConfig": {
@@ -30,7 +177,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 5,
       "options": {
@@ -63,9 +210,9 @@
       },
       "gridPos": {
         "h": 15,
-        "w": 11,
+        "w": 12,
         "x": 0,
-        "y": 4
+        "y": 12
       },
       "hideEmpty": true,
       "hideZero": true,
@@ -119,7 +266,7 @@
           ]
         }
       ],
-      "thresholds": "0, 10000, 20000",
+      "thresholds": "1, 100, 200",
       "timeFrom": null,
       "timeShift": null,
       "title": "Average UPLOAD",
@@ -151,9 +298,9 @@
       },
       "gridPos": {
         "h": 15,
-        "w": 11,
-        "x": 11,
-        "y": 4
+        "w": 12,
+        "x": 12,
+        "y": 12
       },
       "hideEmpty": true,
       "hideZero": true,
@@ -231,21 +378,13 @@
           "tags": [],
           "text": [
             "Municipio I",
-            "Municipio II",
-            "Municipio III",
             "Municipio IX",
-            "Municipio VIII",
-            "Municipio VII",
-            "Municipio X"
+            "Municipio II"
           ],
           "value": [
             "Municipio I",
-            "Municipio II",
-            "Municipio III",
             "Municipio IX",
-            "Municipio VIII",
-            "Municipio VII",
-            "Municipio X"
+            "Municipio II"
           ]
         },
         "datasource": "Postgres",
@@ -272,7 +411,7 @@
             "value": "Municipio II"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio III",
             "value": "Municipio III"
           },
@@ -297,17 +436,17 @@
             "value": "Municipio VI"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio VII",
             "value": "Municipio VII"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio VIII",
             "value": "Municipio VIII"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio X",
             "value": "Municipio X"
           },
@@ -353,32 +492,40 @@
         "current": {
           "selected": true,
           "text": [
-            "Circonvallazione Ostiense, 191, Roma",
-            "Largo Beato Placido Riccardi, 13, Roma",
-            "Largo delle Sette Chiese, 25, Roma",
-            "Via Alessandro Severo, 212, Roma",
-            "Via Benedetto Croce, 48/D, Roma",
-            "Via Benedetto Croce, 50, Roma",
-            "Via Capitan Bavastro, 94, Roma",
-            "Via Ostiense, 106, Roma",
-            "Via Padre Reginaldo Giuliani, 15, Roma",
-            "Via Poggio Ameno, 23, Roma",
-            "Via Umberto Nistri, 11, Roma",
-            "Via Via dei Lincei, 93, Roma"
+            "Piazza Giovanni Agnelli, 10, Roma",
+            "Via Cristoforo Colombo, 570, Roma",
+            "Via Giovanni Frignani, 97, Roma",
+            "Via Ignazio  Silone, 100, Roma",
+            "Via Luigi Chiarini, 400, Roma",
+            "Via Paolo Renzi, 47, Roma",
+            "Via Santi Savarino, 16, Roma",
+            "Via del Turismo, 30/32, Roma",
+            "Via di Decima, 96/102, Roma",
+            "Viale Africa, 109, Roma",
+            "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
+            "Viale dell'Oceano Indiano, 64, Roma",
+            "Viale dell'Oceano Pacifico, 83, Roma",
+            "Viale della Civilta del Lavoro, 10, Roma",
+            "Viale della CiviltÃ  del Lavoro, 10, Roma",
+            "Viale della Previdenza Sociale, 20, Roma"
           ],
           "value": [
-            "Circonvallazione Ostiense, 191, Roma",
-            "Largo Beato Placido Riccardi, 13, Roma",
-            "Largo delle Sette Chiese, 25, Roma",
-            "Via Alessandro Severo, 212, Roma",
-            "Via Benedetto Croce, 48/D, Roma",
-            "Via Benedetto Croce, 50, Roma",
-            "Via Capitan Bavastro, 94, Roma",
-            "Via Ostiense, 106, Roma",
-            "Via Padre Reginaldo Giuliani, 15, Roma",
-            "Via Poggio Ameno, 23, Roma",
-            "Via Umberto Nistri, 11, Roma",
-            "Via Via dei Lincei, 93, Roma"
+            "Piazza Giovanni Agnelli, 10, Roma",
+            "Via Cristoforo Colombo, 570, Roma",
+            "Via Giovanni Frignani, 97, Roma",
+            "Via Ignazio  Silone, 100, Roma",
+            "Via Luigi Chiarini, 400, Roma",
+            "Via Paolo Renzi, 47, Roma",
+            "Via Santi Savarino, 16, Roma",
+            "Via del Turismo, 30/32, Roma",
+            "Via di Decima, 96/102, Roma",
+            "Viale Africa, 109, Roma",
+            "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
+            "Viale dell'Oceano Indiano, 64, Roma",
+            "Viale dell'Oceano Pacifico, 83, Roma",
+            "Viale della Civilta del Lavoro, 10, Roma",
+            "Viale della CiviltÃ  del Lavoro, 10, Roma",
+            "Viale della Previdenza Sociale, 20, Roma"
           ]
         },
         "datasource": "Postgres",
@@ -390,11 +537,6 @@
         "name": "sede",
         "options": [
           {
-            "selected": true,
-            "text": "Circonvallazione Ostiense, 191, Roma",
-            "value": "Circonvallazione Ostiense, 191, Roma"
-          },
-          {
             "selected": false,
             "text": "Circonvallazione Trionfale, 19, Roma",
             "value": "Circonvallazione Trionfale, 19, Roma"
@@ -403,16 +545,6 @@
             "selected": false,
             "text": "Largo Ascianghi, 4, Roma",
             "value": "Largo Ascianghi, 4, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Largo Beato Placido Riccardi, 13, Roma",
-            "value": "Largo Beato Placido Riccardi, 13, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Largo delle Sette Chiese, 25, Roma",
-            "value": "Largo delle Sette Chiese, 25, Roma"
           },
           {
             "selected": false,
@@ -425,7 +557,7 @@
             "value": "Piazza Di Porta Metronia, 2, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Piazza Giovanni Agnelli, 10, Roma",
             "value": "Piazza Giovanni Agnelli, 10, Roma"
           },
@@ -456,11 +588,6 @@
           },
           {
             "selected": false,
-            "text": "Piazza Sempione, 15, Roma",
-            "value": "Piazza Sempione, 15, Roma"
-          },
-          {
-            "selected": false,
             "text": "Piazza del Campidoglio, 1, Roma",
             "value": "Piazza del Campidoglio, 1, Roma"
           },
@@ -468,16 +595,6 @@
             "selected": false,
             "text": "Piazza di Campitelli, 7, Roma",
             "value": "Piazza di Campitelli, 7, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Piazza di Cinecitta, 11, Roma",
-            "value": "Piazza di Cinecitta, 11, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Piazza di CinecittÃ , 11, Roma",
-            "value": "Piazza di CinecittÃ , 11, Roma"
           },
           {
             "selected": false,
@@ -490,24 +607,9 @@
             "value": "Via 4 Novembre, 94, Roma"
           },
           {
-            "selected": true,
-            "text": "Via Alessandro Severo, 212, Roma",
-            "value": "Via Alessandro Severo, 212, Roma"
-          },
-          {
             "selected": false,
             "text": "Via Antonio Mordini, 19, Roma",
             "value": "Via Antonio Mordini, 19, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Benedetto Croce, 48/D, Roma",
-            "value": "Via Benedetto Croce, 48/D, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Benedetto Croce, 50, Roma",
-            "value": "Via Benedetto Croce, 50, Roma"
           },
           {
             "selected": false,
@@ -516,21 +618,6 @@
           },
           {
             "selected": true,
-            "text": "Via Capitan Bavastro, 94, Roma",
-            "value": "Via Capitan Bavastro, 94, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Claudio, 1, Roma",
-            "value": "Via Claudio, 1, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Costantino Beschi, 12, Roma",
-            "value": "Via Costantino Beschi, 12, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Cristoforo Colombo, 570, Roma",
             "value": "Via Cristoforo Colombo, 570, Roma"
           },
@@ -546,16 +633,6 @@
           },
           {
             "selected": false,
-            "text": "Via Euripide, 15, Roma",
-            "value": "Via Euripide, 15, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Flavio Ando, 12, Roma",
-            "value": "Via Flavio Ando, 12, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Gabriele Camozzi, 4, Roma",
             "value": "Via Gabriele Camozzi, 4, Roma"
           },
@@ -565,7 +642,7 @@
             "value": "Via Gabriele Camozzi, 8, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Via Giovanni Frignani, 97, Roma",
             "value": "Via Giovanni Frignani, 97, Roma"
           },
@@ -576,26 +653,16 @@
           },
           {
             "selected": false,
-            "text": "Via Giuliano Da Sangallo, 11, Roma",
-            "value": "Via Giuliano Da Sangallo, 11, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Goito, 35, Roma",
             "value": "Via Goito, 35, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Via Ignazio  Silone, 100, Roma",
             "value": "Via Ignazio  Silone, 100, Roma"
           },
           {
-            "selected": false,
-            "text": "Via Jaime Pintor, 6, Roma",
-            "value": "Via Jaime Pintor, 6, Roma"
-          },
-          {
-            "selected": false,
+            "selected": true,
             "text": "Via Luigi Chiarini, 400, Roma",
             "value": "Via Luigi Chiarini, 400, Roma"
           },
@@ -611,23 +678,8 @@
           },
           {
             "selected": false,
-            "text": "Via Lusitania, 16, Roma",
-            "value": "Via Lusitania, 16, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Merulana, 123, Roma",
             "value": "Via Merulana, 123, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Monte Ruggero, 39, Roma",
-            "value": "Via Monte Ruggero, 39, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Nicola Mascardi, 11, Roma",
-            "value": "Via Nicola Mascardi, 11, Roma"
           },
           {
             "selected": false,
@@ -636,26 +688,11 @@
           },
           {
             "selected": true,
-            "text": "Via Ostiense, 106, Roma",
-            "value": "Via Ostiense, 106, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Padre Reginaldo Giuliani, 15, Roma",
-            "value": "Via Padre Reginaldo Giuliani, 15, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Paolo Renzi, 47, Roma",
             "value": "Via Paolo Renzi, 47, Roma"
           },
           {
             "selected": true,
-            "text": "Via Poggio Ameno, 23, Roma",
-            "value": "Via Poggio Ameno, 23, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Santi Savarino, 16, Roma",
             "value": "Via Santi Savarino, 16, Roma"
           },
@@ -671,43 +708,13 @@
           },
           {
             "selected": false,
-            "text": "Via Tommaso Fortifiocca, 71, Roma",
-            "value": "Via Tommaso Fortifiocca, 71, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Trionfale, 45, Roma",
             "value": "Via Trionfale, 45, Roma"
           },
           {
             "selected": false,
-            "text": "Via Tuscolana, 950, Roma",
-            "value": "Via Tuscolana, 950, Roma"
-          },
-          {
-            "selected": false,
             "text": "Via Ulisse Aldrovandi, 18, Roma",
             "value": "Via Ulisse Aldrovandi, 18, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Umberto Nistri, 11, Roma",
-            "value": "Via Umberto Nistri, 11, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Val Maggia, 21, Roma",
-            "value": "Via Val Maggia, 21, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via Val di Lanzo, 187, Roma",
-            "value": "Via Val di Lanzo, 187, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Via dei Lincei, 93, Roma",
-            "value": "Via Via dei Lincei, 93, Roma"
           },
           {
             "selected": false,
@@ -718,11 +725,6 @@
             "selected": false,
             "text": "Via del Colosseo, 62, Roma",
             "value": "Via del Colosseo, 62, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via del Martin Pescatore, 66, Roma",
-            "value": "Via del Martin Pescatore, 66, Roma"
           },
           {
             "selected": false,
@@ -740,12 +742,7 @@
             "value": "Via del Tritone, 142, Roma"
           },
           {
-            "selected": false,
-            "text": "Via del Tufo, 27, Roma",
-            "value": "Via del Tufo, 27, Roma"
-          },
-          {
-            "selected": false,
+            "selected": true,
             "text": "Via del Turismo, 30/32, Roma",
             "value": "Via del Turismo, 30/32, Roma"
           },
@@ -765,7 +762,7 @@
             "value": "Via delle Tre Pile, 1, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Via di Decima, 96/102, Roma",
             "value": "Via di Decima, 96/102, Roma"
           },
@@ -775,47 +772,22 @@
             "value": "Via di Monte Tarpeo, 41, Roma"
           },
           {
-            "selected": false,
-            "text": "Via di Porta San Sebastiano, 2, Roma",
-            "value": "Via di Porta San Sebastiano, 2, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Via di Scorticabove, 77, Roma",
-            "value": "Via di Scorticabove, 77, Roma"
-          },
-          {
-            "selected": false,
-            "text": "Viale Adriatico, 140, Roma",
-            "value": "Viale Adriatico, 140, Roma"
-          },
-          {
-            "selected": false,
+            "selected": true,
             "text": "Viale Africa, 109, Roma",
             "value": "Viale Africa, 109, Roma"
           },
           {
-            "selected": false,
-            "text": "Viale San Giovanni Bosco, 125, Roma",
-            "value": "Viale San Giovanni Bosco, 125, Roma"
-          },
-          {
-            "selected": false,
+            "selected": true,
             "text": "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
             "value": "Viale dei Caduti nella Guerra di Liberazione, 258, Roma"
           },
           {
-            "selected": false,
-            "text": "Viale del Lido, 6, Roma",
-            "value": "Viale del Lido, 6, Roma"
-          },
-          {
-            "selected": false,
+            "selected": true,
             "text": "Viale dell'Oceano Indiano, 64, Roma",
             "value": "Viale dell'Oceano Indiano, 64, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Viale dell'Oceano Pacifico, 83, Roma",
             "value": "Viale dell'Oceano Pacifico, 83, Roma"
           },
@@ -825,17 +797,17 @@
             "value": "Viale dell'Uccelliera, 1, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Viale della Civilta del Lavoro, 10, Roma",
             "value": "Viale della Civilta del Lavoro, 10, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Viale della CiviltÃ  del Lavoro, 10, Roma",
             "value": "Viale della CiviltÃ  del Lavoro, 10, Roma"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Viale della Previdenza Sociale, 20, Roma",
             "value": "Viale della Previdenza Sociale, 20, Roma"
           },
@@ -859,8 +831,8 @@
     ]
   },
   "time": {
-    "from": "2020-06-02T00:00:01.500Z",
-    "to": "2020-07-11T23:59:57.500Z"
+    "from": "2020-06-24T00:00:00.000Z",
+    "to": "2020-06-27T23:59:59.000Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -877,7 +849,7 @@
     ]
   },
   "timezone": "utc",
-  "title": "Infovis Dashboard",
+  "title": "Roma open data",
   "uid": "xkQNiBdMz",
-  "version": 2
+  "version": 1
 }
