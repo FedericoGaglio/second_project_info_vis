@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1600522979927,
+  "iteration": 1600525166696,
   "links": [
     {
       "$$hashKey": "object:245",
@@ -36,12 +36,12 @@
         "defaults": {
           "custom": {
             "calculation": "sum",
-            "colorPalette": "custom",
+            "colorPalette": "interpolateYlGnBu",
             "colorSpace": "rgb",
             "groupBy": 60,
             "invertPalette": false,
             "thresholds": {
-              "mode": "absolute",
+              "mode": "percentage",
               "steps": [
                 {
                   "color": "green",
@@ -66,11 +66,15 @@
                 {
                   "color": "purple",
                   "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
                 }
               ]
             }
           },
-          "max": 100,
+          "max": 50,
           "min": 0,
           "unit": "GB"
         },
@@ -85,13 +89,121 @@
       "id": 9,
       "maxPerRow": 2,
       "options": {
-        "from": "0",
+        "from": "6",
         "showLegend": true,
-        "to": "23"
+        "to": "21"
       },
       "pluginVersion": "7.1.5",
       "repeat": "municipio",
       "repeatDirection": "h",
+      "scopedVars": {
+        "municipio": {
+          "selected": true,
+          "text": "Municipio I",
+          "value": "Municipio I"
+        }
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Upload $municipio",
+      "type": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
+      "datasource": "Postgres",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "calculation": "sum",
+            "colorPalette": "interpolateYlGnBu",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 40
+                },
+                {
+                  "color": "blue",
+                  "value": 50
+                },
+                {
+                  "color": "purple",
+                  "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                }
+              ]
+            }
+          },
+          "max": 50,
+          "min": 0,
+          "unit": "GB"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 10,
+      "maxPerRow": 2,
+      "options": {
+        "from": "6",
+        "showLegend": true,
+        "to": "21"
+      },
+      "pluginVersion": "7.1.5",
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1600525166696,
+      "repeatPanelId": 9,
       "scopedVars": {
         "municipio": {
           "selected": true,
@@ -129,7 +241,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "$municipio",
+      "title": "Upload $municipio",
       "type": "marcusolsson-hourly-heatmap-panel"
     },
     {
@@ -138,12 +250,12 @@
         "defaults": {
           "custom": {
             "calculation": "sum",
-            "colorPalette": "custom",
+            "colorPalette": "interpolateYlGnBu",
             "colorSpace": "rgb",
             "groupBy": 60,
             "invertPalette": false,
             "thresholds": {
-              "mode": "absolute",
+              "mode": "percentage",
               "steps": [
                 {
                   "color": "green",
@@ -168,11 +280,15 @@
                 {
                   "color": "purple",
                   "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
                 }
               ]
             }
           },
-          "max": 100,
+          "max": 50,
           "min": 0,
           "unit": "GB"
         },
@@ -181,20 +297,20 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 0
+        "x": 0,
+        "y": 8
       },
-      "id": 10,
+      "id": 11,
       "maxPerRow": 2,
       "options": {
-        "from": "0",
+        "from": "6",
         "showLegend": true,
-        "to": "23"
+        "to": "21"
       },
       "pluginVersion": "7.1.5",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1600522979927,
+      "repeatIteration": 1600525166696,
       "repeatPanelId": 9,
       "scopedVars": {
         "municipio": {
@@ -233,215 +349,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "$municipio",
-      "type": "marcusolsson-hourly-heatmap-panel"
-    },
-    {
-      "datasource": "Postgres",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "calculation": "sum",
-            "colorPalette": "custom",
-            "colorSpace": "rgb",
-            "groupBy": 60,
-            "invertPalette": false,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 10
-                },
-                {
-                  "color": "orange",
-                  "value": 20
-                },
-                {
-                  "color": "red",
-                  "value": 40
-                },
-                {
-                  "color": "blue",
-                  "value": 50
-                },
-                {
-                  "color": "purple",
-                  "value": 60
-                }
-              ]
-            }
-          },
-          "max": 100,
-          "min": 0,
-          "unit": "GB"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 8
-      },
-      "id": 11,
-      "maxPerRow": 2,
-      "options": {
-        "from": "0",
-        "showLegend": true,
-        "to": "23"
-      },
-      "pluginVersion": "7.1.5",
-      "repeat": null,
-      "repeatDirection": "h",
-      "repeatIteration": 1600522979927,
-      "repeatPanelId": 9,
-      "scopedVars": {
-        "municipio": {
-          "selected": true,
-          "text": "Municipio IV",
-          "value": "Municipio IV"
-        }
-      },
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$municipio",
-      "type": "marcusolsson-hourly-heatmap-panel"
-    },
-    {
-      "datasource": "Postgres",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "calculation": "sum",
-            "colorPalette": "custom",
-            "colorSpace": "rgb",
-            "groupBy": 60,
-            "invertPalette": false,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 10
-                },
-                {
-                  "color": "orange",
-                  "value": 20
-                },
-                {
-                  "color": "red",
-                  "value": 40
-                },
-                {
-                  "color": "blue",
-                  "value": 50
-                },
-                {
-                  "color": "purple",
-                  "value": 60
-                }
-              ]
-            }
-          },
-          "max": 100,
-          "min": 0,
-          "unit": "GB"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 8
-      },
-      "id": 12,
-      "maxPerRow": 2,
-      "options": {
-        "from": "0",
-        "showLegend": true,
-        "to": "23"
-      },
-      "pluginVersion": "7.1.5",
-      "repeat": null,
-      "repeatDirection": "h",
-      "repeatIteration": 1600522979927,
-      "repeatPanelId": 9,
-      "scopedVars": {
-        "municipio": {
-          "selected": true,
-          "text": "Municipio VI",
-          "value": "Municipio VI"
-        }
-      },
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "$municipio",
+      "title": "Upload $municipio",
       "type": "marcusolsson-hourly-heatmap-panel"
     }
   ],
@@ -454,18 +362,17 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": [
+            "Municipio I",
             "Municipio II",
-            "Municipio III",
-            "Municipio VI",
-            "Municipio IV"
+            "Municipio III"
           ],
           "value": [
+            "Municipio I",
             "Municipio II",
-            "Municipio III",
-            "Municipio VI",
-            "Municipio IV"
+            "Municipio III"
           ]
         },
         "datasource": "Postgres",
@@ -482,7 +389,7 @@
             "value": "Municipio  XII"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Municipio I",
             "value": "Municipio I"
           },
@@ -497,7 +404,7 @@
             "value": "Municipio III"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio IV",
             "value": "Municipio IV"
           },
@@ -512,7 +419,7 @@
             "value": "Municipio V"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio VI",
             "value": "Municipio VI"
           },
@@ -571,78 +478,107 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": [
-            "Piazza Giuseppe Gola, 61, Roma",
+            "Circonvallazione Trionfale, 19, Roma",
+            "Largo Ascianghi, 4, Roma",
+            "Lungotevere in Augusta, 11, Roma",
+            "Piazza Di Porta Metronia, 2, Roma",
+            "Piazza Giuseppe Mazzini, 41, Roma",
             "Piazza Grecia, 23/25, Roma",
-            "Piazza Paolo Rossi, 6, Roma",
-            "Piazza Riccardo Balsamo Crivelli, 66, Roma",
+            "Piazza Lovatelli, 35, Roma",
+            "Piazza Orazio Giustiniani, 4, Roma",
+            "Piazza San Pantaleo, 10, Roma",
             "Piazza Sempione, 15, Roma",
-            "Piazzale Hegel, 14, Roma",
-            "Via Amedeo Sommovigo, 40, Roma",
-            "Via Calcinaia, 44, Roma",
-            "Via Calimera, 133, Roma",
+            "Piazza del Campidoglio, 1, Roma",
+            "Piazza di Campitelli, 7, Roma",
+            "Piazza di Ponte Umberto I, 1, Roma",
+            "Via 4 Novembre, 94, Roma",
+            "Via Antonio Mordini, 19, Roma",
             "Via Campania, 63, Roma",
-            "Via Canterano, 12, Roma",
             "Via Dire Daua, 11, Roma",
-            "Via Eufrasia Martinetti, 21, Roma",
-            "Via Fabriano, 59, Roma",
-            "Via Federigo Verdinois, 54, Roma",
-            "Via Fermo Corni, 20, Roma",
+            "Via Ennio Quirino Visconti, 13, Roma",
             "Via Flavio Ando, 12, Roma",
+            "Via Gabriele Camozzi, 4, Roma",
+            "Via Gabriele Camozzi, 8, Roma",
+            "Via Giulia, 25, Roma",
             "Via Goito, 35, Roma",
             "Via Jaime Pintor, 6, Roma",
-            "Via Libero Leonardi, 153, Roma",
+            "Via Luigi Petroselli, 45, Roma",
+            "Via Luigi Petroselli, 50, Roma",
+            "Via Merulana, 123, Roma",
             "Via Monte Ruggero, 39, Roma",
             "Via Nomentana, 70, Roma",
-            "Via Pollenza, 54, Roma",
-            "Via Rugantino, 113, Roma",
             "Via Savoia, 13, Roma",
             "Via Tiburtina Antica, 25, Roma",
-            "Via Tiburtina, 1163, Roma",
+            "Via Trionfale, 45, Roma",
             "Via Ulisse Aldrovandi, 18, Roma",
             "Via Val Maggia, 21, Roma",
             "Via Val di Lanzo, 187, Roma",
+            "Via dei Cerchi, 6, Roma",
+            "Via del Colosseo, 62, Roma",
+            "Via del Tempio di Giove, 21, Roma",
+            "Via del Tempio di Giove, 3, Roma",
+            "Via del Tritone, 142, Roma",
             "Via del Tufo, 27, Roma",
-            "Via di San Romano, 14/A, Roma",
+            "Via della Consolazione, 4, Roma",
+            "Via della Greca, 5, Roma",
+            "Via delle Tre Pile, 1, Roma",
+            "Via di Monte Tarpeo, 41, Roma",
             "Viale Adriatico, 140, Roma",
-            "Viale Duilio Cambellotti, 11, Roma"
+            "Viale dell'Uccelliera, 1, Roma",
+            "Vicolo del Bottino, 1, Roma"
           ],
           "value": [
-            "Piazza Giuseppe Gola, 61, Roma",
+            "Circonvallazione Trionfale, 19, Roma",
+            "Largo Ascianghi, 4, Roma",
+            "Lungotevere in Augusta, 11, Roma",
+            "Piazza Di Porta Metronia, 2, Roma",
+            "Piazza Giuseppe Mazzini, 41, Roma",
             "Piazza Grecia, 23/25, Roma",
-            "Piazza Paolo Rossi, 6, Roma",
-            "Piazza Riccardo Balsamo Crivelli, 66, Roma",
+            "Piazza Lovatelli, 35, Roma",
+            "Piazza Orazio Giustiniani, 4, Roma",
+            "Piazza San Pantaleo, 10, Roma",
             "Piazza Sempione, 15, Roma",
-            "Piazzale Hegel, 14, Roma",
-            "Via Amedeo Sommovigo, 40, Roma",
-            "Via Calcinaia, 44, Roma",
-            "Via Calimera, 133, Roma",
+            "Piazza del Campidoglio, 1, Roma",
+            "Piazza di Campitelli, 7, Roma",
+            "Piazza di Ponte Umberto I, 1, Roma",
+            "Via 4 Novembre, 94, Roma",
+            "Via Antonio Mordini, 19, Roma",
             "Via Campania, 63, Roma",
-            "Via Canterano, 12, Roma",
             "Via Dire Daua, 11, Roma",
-            "Via Eufrasia Martinetti, 21, Roma",
-            "Via Fabriano, 59, Roma",
-            "Via Federigo Verdinois, 54, Roma",
-            "Via Fermo Corni, 20, Roma",
+            "Via Ennio Quirino Visconti, 13, Roma",
             "Via Flavio Ando, 12, Roma",
+            "Via Gabriele Camozzi, 4, Roma",
+            "Via Gabriele Camozzi, 8, Roma",
+            "Via Giulia, 25, Roma",
             "Via Goito, 35, Roma",
             "Via Jaime Pintor, 6, Roma",
-            "Via Libero Leonardi, 153, Roma",
+            "Via Luigi Petroselli, 45, Roma",
+            "Via Luigi Petroselli, 50, Roma",
+            "Via Merulana, 123, Roma",
             "Via Monte Ruggero, 39, Roma",
             "Via Nomentana, 70, Roma",
-            "Via Pollenza, 54, Roma",
-            "Via Rugantino, 113, Roma",
             "Via Savoia, 13, Roma",
             "Via Tiburtina Antica, 25, Roma",
-            "Via Tiburtina, 1163, Roma",
+            "Via Trionfale, 45, Roma",
             "Via Ulisse Aldrovandi, 18, Roma",
             "Via Val Maggia, 21, Roma",
             "Via Val di Lanzo, 187, Roma",
+            "Via dei Cerchi, 6, Roma",
+            "Via del Colosseo, 62, Roma",
+            "Via del Tempio di Giove, 21, Roma",
+            "Via del Tempio di Giove, 3, Roma",
+            "Via del Tritone, 142, Roma",
             "Via del Tufo, 27, Roma",
-            "Via di San Romano, 14/A, Roma",
+            "Via della Consolazione, 4, Roma",
+            "Via della Greca, 5, Roma",
+            "Via delle Tre Pile, 1, Roma",
+            "Via di Monte Tarpeo, 41, Roma",
             "Viale Adriatico, 140, Roma",
-            "Viale Duilio Cambellotti, 11, Roma"
+            "Viale dell'Uccelliera, 1, Roma",
+            "Vicolo del Bottino, 1, Roma"
           ]
         },
         "datasource": "Postgres",
@@ -655,8 +591,28 @@
         "options": [
           {
             "selected": true,
-            "text": "Piazza Giuseppe Gola, 61, Roma",
-            "value": "Piazza Giuseppe Gola, 61, Roma"
+            "text": "Circonvallazione Trionfale, 19, Roma",
+            "value": "Circonvallazione Trionfale, 19, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Largo Ascianghi, 4, Roma",
+            "value": "Largo Ascianghi, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Lungotevere in Augusta, 11, Roma",
+            "value": "Lungotevere in Augusta, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Di Porta Metronia, 2, Roma",
+            "value": "Piazza Di Porta Metronia, 2, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Giuseppe Mazzini, 41, Roma",
+            "value": "Piazza Giuseppe Mazzini, 41, Roma"
           },
           {
             "selected": true,
@@ -665,13 +621,18 @@
           },
           {
             "selected": true,
-            "text": "Piazza Paolo Rossi, 6, Roma",
-            "value": "Piazza Paolo Rossi, 6, Roma"
+            "text": "Piazza Lovatelli, 35, Roma",
+            "value": "Piazza Lovatelli, 35, Roma"
           },
           {
             "selected": true,
-            "text": "Piazza Riccardo Balsamo Crivelli, 66, Roma",
-            "value": "Piazza Riccardo Balsamo Crivelli, 66, Roma"
+            "text": "Piazza Orazio Giustiniani, 4, Roma",
+            "value": "Piazza Orazio Giustiniani, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza San Pantaleo, 10, Roma",
+            "value": "Piazza San Pantaleo, 10, Roma"
           },
           {
             "selected": true,
@@ -680,23 +641,28 @@
           },
           {
             "selected": true,
-            "text": "Piazzale Hegel, 14, Roma",
-            "value": "Piazzale Hegel, 14, Roma"
+            "text": "Piazza del Campidoglio, 1, Roma",
+            "value": "Piazza del Campidoglio, 1, Roma"
           },
           {
             "selected": true,
-            "text": "Via Amedeo Sommovigo, 40, Roma",
-            "value": "Via Amedeo Sommovigo, 40, Roma"
+            "text": "Piazza di Campitelli, 7, Roma",
+            "value": "Piazza di Campitelli, 7, Roma"
           },
           {
             "selected": true,
-            "text": "Via Calcinaia, 44, Roma",
-            "value": "Via Calcinaia, 44, Roma"
+            "text": "Piazza di Ponte Umberto I, 1, Roma",
+            "value": "Piazza di Ponte Umberto I, 1, Roma"
           },
           {
             "selected": true,
-            "text": "Via Calimera, 133, Roma",
-            "value": "Via Calimera, 133, Roma"
+            "text": "Via 4 Novembre, 94, Roma",
+            "value": "Via 4 Novembre, 94, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Antonio Mordini, 19, Roma",
+            "value": "Via Antonio Mordini, 19, Roma"
           },
           {
             "selected": true,
@@ -705,38 +671,33 @@
           },
           {
             "selected": true,
-            "text": "Via Canterano, 12, Roma",
-            "value": "Via Canterano, 12, Roma"
-          },
-          {
-            "selected": true,
             "text": "Via Dire Daua, 11, Roma",
             "value": "Via Dire Daua, 11, Roma"
           },
           {
             "selected": true,
-            "text": "Via Eufrasia Martinetti, 21, Roma",
-            "value": "Via Eufrasia Martinetti, 21, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Fabriano, 59, Roma",
-            "value": "Via Fabriano, 59, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Federigo Verdinois, 54, Roma",
-            "value": "Via Federigo Verdinois, 54, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Fermo Corni, 20, Roma",
-            "value": "Via Fermo Corni, 20, Roma"
+            "text": "Via Ennio Quirino Visconti, 13, Roma",
+            "value": "Via Ennio Quirino Visconti, 13, Roma"
           },
           {
             "selected": true,
             "text": "Via Flavio Ando, 12, Roma",
             "value": "Via Flavio Ando, 12, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Gabriele Camozzi, 4, Roma",
+            "value": "Via Gabriele Camozzi, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Gabriele Camozzi, 8, Roma",
+            "value": "Via Gabriele Camozzi, 8, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Giulia, 25, Roma",
+            "value": "Via Giulia, 25, Roma"
           },
           {
             "selected": true,
@@ -750,8 +711,18 @@
           },
           {
             "selected": true,
-            "text": "Via Libero Leonardi, 153, Roma",
-            "value": "Via Libero Leonardi, 153, Roma"
+            "text": "Via Luigi Petroselli, 45, Roma",
+            "value": "Via Luigi Petroselli, 45, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Luigi Petroselli, 50, Roma",
+            "value": "Via Luigi Petroselli, 50, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Merulana, 123, Roma",
+            "value": "Via Merulana, 123, Roma"
           },
           {
             "selected": true,
@@ -765,16 +736,6 @@
           },
           {
             "selected": true,
-            "text": "Via Pollenza, 54, Roma",
-            "value": "Via Pollenza, 54, Roma"
-          },
-          {
-            "selected": true,
-            "text": "Via Rugantino, 113, Roma",
-            "value": "Via Rugantino, 113, Roma"
-          },
-          {
-            "selected": true,
             "text": "Via Savoia, 13, Roma",
             "value": "Via Savoia, 13, Roma"
           },
@@ -785,8 +746,8 @@
           },
           {
             "selected": true,
-            "text": "Via Tiburtina, 1163, Roma",
-            "value": "Via Tiburtina, 1163, Roma"
+            "text": "Via Trionfale, 45, Roma",
+            "value": "Via Trionfale, 45, Roma"
           },
           {
             "selected": true,
@@ -805,13 +766,53 @@
           },
           {
             "selected": true,
+            "text": "Via dei Cerchi, 6, Roma",
+            "value": "Via dei Cerchi, 6, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Colosseo, 62, Roma",
+            "value": "Via del Colosseo, 62, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tempio di Giove, 21, Roma",
+            "value": "Via del Tempio di Giove, 21, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tempio di Giove, 3, Roma",
+            "value": "Via del Tempio di Giove, 3, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tritone, 142, Roma",
+            "value": "Via del Tritone, 142, Roma"
+          },
+          {
+            "selected": true,
             "text": "Via del Tufo, 27, Roma",
             "value": "Via del Tufo, 27, Roma"
           },
           {
             "selected": true,
-            "text": "Via di San Romano, 14/A, Roma",
-            "value": "Via di San Romano, 14/A, Roma"
+            "text": "Via della Consolazione, 4, Roma",
+            "value": "Via della Consolazione, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via della Greca, 5, Roma",
+            "value": "Via della Greca, 5, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via delle Tre Pile, 1, Roma",
+            "value": "Via delle Tre Pile, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Monte Tarpeo, 41, Roma",
+            "value": "Via di Monte Tarpeo, 41, Roma"
           },
           {
             "selected": true,
@@ -820,8 +821,13 @@
           },
           {
             "selected": true,
-            "text": "Viale Duilio Cambellotti, 11, Roma",
-            "value": "Viale Duilio Cambellotti, 11, Roma"
+            "text": "Viale dell'Uccelliera, 1, Roma",
+            "value": "Viale dell'Uccelliera, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Vicolo del Bottino, 1, Roma",
+            "value": "Vicolo del Bottino, 1, Roma"
           }
         ],
         "query": "select posizione from connessioni where municipio in ($municipio) group by posizione;",
@@ -838,8 +844,8 @@
     ]
   },
   "time": {
-    "from": "2020-06-01T00:00:00.000Z",
-    "to": "2020-08-31T23:59:59.000Z"
+    "from": "2020-07-01T00:00:00.000Z",
+    "to": "2020-07-15T23:59:59.000Z"
   },
   "timepicker": {
     "refresh_intervals": [
