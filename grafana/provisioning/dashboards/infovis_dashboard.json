@@ -12,25 +12,24 @@
       }
     ]
   },
-  "editable": true,
+  "editable": false,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "iteration": 1600502509085,
   "links": [],
   "panels": [
     {
-      "circleMaxSize": "10",
-      "circleMinSize": "0",
+      "circleMaxSize": "20",
+      "circleMinSize": "2",
       "colors": [
-        "rgba(245, 54, 54, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)",
+        "#37872D",
         "#E0B400",
-        "#1F60C4",
+        "#FA6400",
+        "#E02F44",
         "#8F3BB8"
       ],
       "datasource": "Postgres",
-      "decimals": 0,
+      "decimals": 2,
       "esMetric": "Count",
       "fieldConfig": {
         "defaults": {
@@ -39,8 +38,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 15,
+        "w": 11,
         "x": 0,
         "y": 0
       },
@@ -55,6 +54,8 @@
       "maxDataPoints": 1,
       "mouseWheelZoom": true,
       "pluginVersion": "7.1.5",
+      "repeat": null,
+      "repeatDirection": "v",
       "showLegend": true,
       "stickyLabels": false,
       "tableQueryOptions": {
@@ -62,16 +63,17 @@
         "labelField": "posizione",
         "latitudeField": "latitudine",
         "longitudeField": "longitudine",
-        "metricField": "upload",
+        "metricField": "tipologia",
         "queryType": "coordinates"
       },
       "targets": [
         {
           "format": "table",
           "group": [],
+          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select posizione, upload, longitudine, latitudine from \"mytable\" limit 5000;\n",
+          "rawSql": "select posizione, longitudine, latitudine, div(avg($tipologia), 1000) as tipologia from connessioni where municipio in ($municipio) group by (posizione, longitudine, latitudine);\n",
           "refId": "A",
           "select": [
             [
@@ -93,24 +95,171 @@
           ]
         }
       ],
-      "thresholds": "250000, 500000,  1000000, 5000000, 10000000",
+      "thresholds": "5000, 10000, 15000, 20000",
       "timeFrom": null,
       "timeShift": null,
-      "title": "WorldMap Template",
+      "title": "Average UPLOAD",
+      "transformations": [],
       "type": "grafana-worldmap-panel",
-      "unitPlural": "",
+      "unitPlural": "MB",
       "unitSingle": "",
+      "unitSingular": "MB",
       "valueName": "total"
     }
   ],
+  "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": [
+            "Municipio IV",
+            "Municipio VIII"
+          ],
+          "value": [
+            "Municipio IV",
+            "Municipio VIII"
+          ]
+        },
+        "datasource": "Postgres",
+        "definition": "select municipio from connessioni group by municipio;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Municipio",
+        "multi": true,
+        "name": "municipio",
+        "options": [
+          {
+            "selected": false,
+            "text": "Municipio  XII",
+            "value": "Municipio  XII"
+          },
+          {
+            "selected": false,
+            "text": "Municipio I",
+            "value": "Municipio I"
+          },
+          {
+            "selected": false,
+            "text": "Municipio II",
+            "value": "Municipio II"
+          },
+          {
+            "selected": false,
+            "text": "Municipio III",
+            "value": "Municipio III"
+          },
+          {
+            "selected": true,
+            "text": "Municipio IV",
+            "value": "Municipio IV"
+          },
+          {
+            "selected": false,
+            "text": "Municipio IX",
+            "value": "Municipio IX"
+          },
+          {
+            "selected": false,
+            "text": "Municipio V",
+            "value": "Municipio V"
+          },
+          {
+            "selected": false,
+            "text": "Municipio VI",
+            "value": "Municipio VI"
+          },
+          {
+            "selected": false,
+            "text": "Municipio VII",
+            "value": "Municipio VII"
+          },
+          {
+            "selected": true,
+            "text": "Municipio VIII",
+            "value": "Municipio VIII"
+          },
+          {
+            "selected": false,
+            "text": "Municipio X",
+            "value": "Municipio X"
+          },
+          {
+            "selected": false,
+            "text": "Municipio XI",
+            "value": "Municipio XI"
+          },
+          {
+            "selected": false,
+            "text": "Municipio XII",
+            "value": "Municipio XII"
+          },
+          {
+            "selected": false,
+            "text": "Municipio XIII",
+            "value": "Municipio XIII"
+          },
+          {
+            "selected": false,
+            "text": "Municipio XIV",
+            "value": "Municipio XIV"
+          },
+          {
+            "selected": false,
+            "text": "Municipio XV",
+            "value": "Municipio XV"
+          }
+        ],
+        "query": "select municipio from connessioni group by municipio;",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "upload",
+          "value": "upload"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Tipologia",
+        "multi": false,
+        "name": "tipologia",
+        "options": [
+          {
+            "selected": true,
+            "text": "upload",
+            "value": "upload"
+          },
+          {
+            "selected": false,
+            "text": "download",
+            "value": "download"
+          }
+        ],
+        "query": "upload, download",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -127,8 +276,8 @@
       "1d"
     ]
   },
-  "timezone": "",
+  "timezone": "Europe/Rome",
   "title": "Infovis Dashboard",
   "uid": "xkQNiBdMz",
-  "version": 2
+  "version": 1
 }

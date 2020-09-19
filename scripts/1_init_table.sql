@@ -1,4 +1,4 @@
-CREATE TABLE mytable(
+CREATE TABLE connessioni(
    STARTDATE       DATE  NOT NULL
   ,STARTTIME       VARCHAR(8) NOT NULL
   ,ENDDATE         DATE  NOT NULL
@@ -16,3 +16,5 @@ CREATE TABLE mytable(
   ,LATITUDINE      NUMERIC(18,15) NOT NULL
   ,LONGITUDINE     NUMERIC(18,15) NOT NULL
 );
+
+\COPY connessioni FROM '/docker-entrypoint-initdb.d/dataset_connessioni.csv' DELIMITER ',' CSV HEADER;
