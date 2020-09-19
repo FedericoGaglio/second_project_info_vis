@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1600525065247,
+  "iteration": 1600531186383,
   "links": [
     {
       "$$hashKey": "object:245",
@@ -31,100 +31,85 @@
   ],
   "panels": [
     {
-      "datasource": null,
+      "datasource": "Postgres",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {
+            "calculation": "sum",
+            "colorPalette": "interpolateYlGnBu",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 40
+                },
+                {
+                  "color": "blue",
+                  "value": 50
+                },
+                {
+                  "color": "purple",
+                  "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                }
+              ]
+            }
+          },
+          "decimals": 0,
+          "max": 1000000000,
+          "unit": "decbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 24,
+        "h": 8,
+        "w": 12,
         "x": 0,
         "y": 0
       },
-      "id": 5,
+      "id": 9,
+      "maxPerRow": 2,
       "options": {
-        "content": "<table align='center'>\n    <tr>\n        <td>Municipi selezionati</td>\n        <td colspan=\"3\">${municipio}</td>\n    </tr>\n    <tr>\n        <td>Dal</td>\n        <td>${__from:date:DD/MM/YYYY} </td>\n         <td>Al</td>\n        <td>${__to:date:DD/MM/YYYY} </td>\n    </tr>\n</table>\n\n         ",
-        "mode": "html"
+        "from": "6",
+        "showLegend": true,
+        "to": "21"
       },
-      "pluginVersion": "7.1.0",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Panel Title",
-      "type": "text"
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 4
-      },
-      "id": 8,
-      "panels": [],
-      "repeat": null,
-      "title": "Upload diviso per sedi",
-      "type": "row"
-    },
-    {
-      "circleMaxSize": "5",
-      "circleMinSize": "3",
-      "colors": [
-        "#37872D",
-        "#E0B400",
-        "#FF9830",
-        "#F2495C"
-      ],
-      "datasource": "Postgres",
-      "decimals": 3,
-      "esMetric": "Count",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 15,
-        "w": 12,
-        "x": 0,
-        "y": 5
-      },
-      "hideEmpty": true,
-      "hideZero": true,
-      "id": 2,
-      "initialZoom": "11",
-      "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "41.9028",
-      "mapCenterLongitude": "12.4964",
-      "maxDataPoints": 1,
-      "mouseWheelZoom": true,
       "pluginVersion": "7.1.5",
-      "repeat": null,
-      "repeatDirection": "v",
-      "showLegend": true,
-      "stickyLabels": false,
-      "tableQueryOptions": {
-        "geohashField": "geohash",
-        "labelField": "posizione",
-        "latitudeField": "latitudine",
-        "longitudeField": "longitudine",
-        "metricField": "tipologia",
-        "queryType": "coordinates"
+      "repeat": "municipio",
+      "repeatDirection": "h",
+      "scopedVars": {
+        "municipio": {
+          "selected": true,
+          "text": "Municipio I",
+          "value": "Municipio I"
+        }
       },
       "targets": [
         {
-          "format": "table",
+          "format": "time_series",
           "group": [],
-          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select posizione, longitudine, latitudine, (avg(upload)::float / 1000000::float) as tipologia from connessioni \nwhere municipio in ($municipio) and \nEXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\nposizione in ($sede)\ngroup by (posizione, longitudine, latitudine);\n",
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)\nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
           "refId": "A",
           "select": [
             [
@@ -146,71 +131,93 @@
           ]
         }
       ],
-      "thresholds": "1, 100, 200",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Medio",
-      "transformations": [],
-      "type": "grafana-worldmap-panel",
-      "unitPlural": "GB",
-      "unitSingle": "",
-      "unitSingular": "GB",
-      "valueName": "total"
+      "title": "Upload $municipio",
+      "type": "marcusolsson-hourly-heatmap-panel"
     },
     {
-      "circleMaxSize": "5",
-      "circleMinSize": "3",
-      "colors": [
-        "#37872D",
-        "#E0B400",
-        "#FF9830",
-        "#F2495C"
-      ],
       "datasource": "Postgres",
-      "decimals": 3,
-      "esMetric": "Count",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {
+            "calculation": "sum",
+            "colorPalette": "interpolateYlGnBu",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 40
+                },
+                {
+                  "color": "blue",
+                  "value": 50
+                },
+                {
+                  "color": "purple",
+                  "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                }
+              ]
+            }
+          },
+          "max": 50,
+          "min": 0,
+          "unit": "GB"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 15,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 5
+        "y": 0
       },
-      "hideEmpty": true,
-      "hideZero": true,
-      "id": 6,
-      "initialZoom": "11",
-      "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "41.9028",
-      "mapCenterLongitude": "12.4964",
-      "maxDataPoints": 1,
-      "mouseWheelZoom": true,
+      "id": 10,
+      "maxPerRow": 2,
+      "options": {
+        "from": "6",
+        "showLegend": true,
+        "to": "21"
+      },
       "pluginVersion": "7.1.5",
-      "repeatDirection": "v",
-      "showLegend": true,
-      "stickyLabels": false,
-      "tableQueryOptions": {
-        "geohashField": "geohash",
-        "labelField": "posizione",
-        "latitudeField": "latitudine",
-        "longitudeField": "longitudine",
-        "metricField": "tipologia",
-        "queryType": "coordinates"
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1600531186383,
+      "repeatPanelId": 9,
+      "scopedVars": {
+        "municipio": {
+          "selected": true,
+          "text": "Municipio II",
+          "value": "Municipio II"
+        }
       },
       "targets": [
         {
-          "format": "table",
+          "format": "time_series",
           "group": [],
-          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select posizione, longitudine, latitudine, (sum(upload)::float / 1000000::float) as tipologia from connessioni \nwhere municipio in ($municipio) and \nEXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\nposizione in ($sede)\ngroup by (posizione, longitudine, latitudine);\n",
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
           "refId": "A",
           "select": [
             [
@@ -232,16 +239,118 @@
           ]
         }
       ],
-      "thresholds": "500, 1000, 2000",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Totale",
-      "transformations": [],
-      "type": "grafana-worldmap-panel",
-      "unitPlural": "GB",
-      "unitSingle": "",
-      "unitSingular": "GB",
-      "valueName": "total"
+      "title": "Upload $municipio",
+      "type": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
+      "datasource": "Postgres",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "calculation": "sum",
+            "colorPalette": "interpolateYlGnBu",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": false,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 40
+                },
+                {
+                  "color": "blue",
+                  "value": 50
+                },
+                {
+                  "color": "purple",
+                  "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                }
+              ]
+            }
+          },
+          "max": 50,
+          "min": 0,
+          "unit": "GB"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 11,
+      "maxPerRow": 2,
+      "options": {
+        "from": "6",
+        "showLegend": true,
+        "to": "21"
+      },
+      "pluginVersion": "7.1.5",
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1600531186383,
+      "repeatPanelId": 9,
+      "scopedVars": {
+        "municipio": {
+          "selected": true,
+          "text": "Municipio III",
+          "value": "Municipio III"
+        }
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Upload $municipio",
+      "type": "marcusolsson-hourly-heatmap-panel"
     }
   ],
   "refresh": false,
@@ -253,14 +362,17 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": [
             "Municipio I",
-            "Municipio II"
+            "Municipio II",
+            "Municipio III"
           ],
           "value": [
             "Municipio I",
-            "Municipio II"
+            "Municipio II",
+            "Municipio III"
           ]
         },
         "datasource": "Postgres",
@@ -287,7 +399,7 @@
             "value": "Municipio II"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Municipio III",
             "value": "Municipio III"
           },
@@ -366,7 +478,8 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": [
             "Circonvallazione Trionfale, 19, Roma",
             "Largo Ascianghi, 4, Roma",
@@ -377,6 +490,7 @@
             "Piazza Lovatelli, 35, Roma",
             "Piazza Orazio Giustiniani, 4, Roma",
             "Piazza San Pantaleo, 10, Roma",
+            "Piazza Sempione, 15, Roma",
             "Piazza del Campidoglio, 1, Roma",
             "Piazza di Campitelli, 7, Roma",
             "Piazza di Ponte Umberto I, 1, Roma",
@@ -385,27 +499,34 @@
             "Via Campania, 63, Roma",
             "Via Dire Daua, 11, Roma",
             "Via Ennio Quirino Visconti, 13, Roma",
+            "Via Flavio Ando, 12, Roma",
             "Via Gabriele Camozzi, 4, Roma",
             "Via Gabriele Camozzi, 8, Roma",
             "Via Giulia, 25, Roma",
             "Via Goito, 35, Roma",
+            "Via Jaime Pintor, 6, Roma",
             "Via Luigi Petroselli, 45, Roma",
             "Via Luigi Petroselli, 50, Roma",
             "Via Merulana, 123, Roma",
+            "Via Monte Ruggero, 39, Roma",
             "Via Nomentana, 70, Roma",
             "Via Savoia, 13, Roma",
             "Via Tiburtina Antica, 25, Roma",
             "Via Trionfale, 45, Roma",
             "Via Ulisse Aldrovandi, 18, Roma",
+            "Via Val Maggia, 21, Roma",
+            "Via Val di Lanzo, 187, Roma",
             "Via dei Cerchi, 6, Roma",
             "Via del Colosseo, 62, Roma",
             "Via del Tempio di Giove, 21, Roma",
             "Via del Tempio di Giove, 3, Roma",
             "Via del Tritone, 142, Roma",
+            "Via del Tufo, 27, Roma",
             "Via della Consolazione, 4, Roma",
             "Via della Greca, 5, Roma",
             "Via delle Tre Pile, 1, Roma",
             "Via di Monte Tarpeo, 41, Roma",
+            "Viale Adriatico, 140, Roma",
             "Viale dell'Uccelliera, 1, Roma",
             "Vicolo del Bottino, 1, Roma"
           ],
@@ -419,6 +540,7 @@
             "Piazza Lovatelli, 35, Roma",
             "Piazza Orazio Giustiniani, 4, Roma",
             "Piazza San Pantaleo, 10, Roma",
+            "Piazza Sempione, 15, Roma",
             "Piazza del Campidoglio, 1, Roma",
             "Piazza di Campitelli, 7, Roma",
             "Piazza di Ponte Umberto I, 1, Roma",
@@ -427,27 +549,34 @@
             "Via Campania, 63, Roma",
             "Via Dire Daua, 11, Roma",
             "Via Ennio Quirino Visconti, 13, Roma",
+            "Via Flavio Ando, 12, Roma",
             "Via Gabriele Camozzi, 4, Roma",
             "Via Gabriele Camozzi, 8, Roma",
             "Via Giulia, 25, Roma",
             "Via Goito, 35, Roma",
+            "Via Jaime Pintor, 6, Roma",
             "Via Luigi Petroselli, 45, Roma",
             "Via Luigi Petroselli, 50, Roma",
             "Via Merulana, 123, Roma",
+            "Via Monte Ruggero, 39, Roma",
             "Via Nomentana, 70, Roma",
             "Via Savoia, 13, Roma",
             "Via Tiburtina Antica, 25, Roma",
             "Via Trionfale, 45, Roma",
             "Via Ulisse Aldrovandi, 18, Roma",
+            "Via Val Maggia, 21, Roma",
+            "Via Val di Lanzo, 187, Roma",
             "Via dei Cerchi, 6, Roma",
             "Via del Colosseo, 62, Roma",
             "Via del Tempio di Giove, 21, Roma",
             "Via del Tempio di Giove, 3, Roma",
             "Via del Tritone, 142, Roma",
+            "Via del Tufo, 27, Roma",
             "Via della Consolazione, 4, Roma",
             "Via della Greca, 5, Roma",
             "Via delle Tre Pile, 1, Roma",
             "Via di Monte Tarpeo, 41, Roma",
+            "Viale Adriatico, 140, Roma",
             "Viale dell'Uccelliera, 1, Roma",
             "Vicolo del Bottino, 1, Roma"
           ]
@@ -507,6 +636,11 @@
           },
           {
             "selected": true,
+            "text": "Piazza Sempione, 15, Roma",
+            "value": "Piazza Sempione, 15, Roma"
+          },
+          {
+            "selected": true,
             "text": "Piazza del Campidoglio, 1, Roma",
             "value": "Piazza del Campidoglio, 1, Roma"
           },
@@ -547,6 +681,11 @@
           },
           {
             "selected": true,
+            "text": "Via Flavio Ando, 12, Roma",
+            "value": "Via Flavio Ando, 12, Roma"
+          },
+          {
+            "selected": true,
             "text": "Via Gabriele Camozzi, 4, Roma",
             "value": "Via Gabriele Camozzi, 4, Roma"
           },
@@ -567,6 +706,11 @@
           },
           {
             "selected": true,
+            "text": "Via Jaime Pintor, 6, Roma",
+            "value": "Via Jaime Pintor, 6, Roma"
+          },
+          {
+            "selected": true,
             "text": "Via Luigi Petroselli, 45, Roma",
             "value": "Via Luigi Petroselli, 45, Roma"
           },
@@ -579,6 +723,11 @@
             "selected": true,
             "text": "Via Merulana, 123, Roma",
             "value": "Via Merulana, 123, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Monte Ruggero, 39, Roma",
+            "value": "Via Monte Ruggero, 39, Roma"
           },
           {
             "selected": true,
@@ -607,6 +756,16 @@
           },
           {
             "selected": true,
+            "text": "Via Val Maggia, 21, Roma",
+            "value": "Via Val Maggia, 21, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Val di Lanzo, 187, Roma",
+            "value": "Via Val di Lanzo, 187, Roma"
+          },
+          {
+            "selected": true,
             "text": "Via dei Cerchi, 6, Roma",
             "value": "Via dei Cerchi, 6, Roma"
           },
@@ -632,6 +791,11 @@
           },
           {
             "selected": true,
+            "text": "Via del Tufo, 27, Roma",
+            "value": "Via del Tufo, 27, Roma"
+          },
+          {
+            "selected": true,
             "text": "Via della Consolazione, 4, Roma",
             "value": "Via della Consolazione, 4, Roma"
           },
@@ -649,6 +813,11 @@
             "selected": true,
             "text": "Via di Monte Tarpeo, 41, Roma",
             "value": "Via di Monte Tarpeo, 41, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale Adriatico, 140, Roma",
+            "value": "Viale Adriatico, 140, Roma"
           },
           {
             "selected": true,
@@ -693,7 +862,7 @@
     ]
   },
   "timezone": "utc",
-  "title": "Geo dashboard",
-  "uid": "home",
+  "title": "Heatmap",
+  "uid": "xkQNiBdMz",
   "version": 1
 }
