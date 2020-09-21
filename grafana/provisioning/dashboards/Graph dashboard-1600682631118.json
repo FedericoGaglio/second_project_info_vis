@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1600676284077,
+  "iteration": 1600682281033,
   "links": [
     {
       "asDropdown": true,
@@ -395,6 +395,148 @@
         "align": false,
         "alignLevel": 2
       }
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "Postgres",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 21,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 6,
+      "interval": null,
+      "legend": {
+        "percentage": true,
+        "show": true,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.1.5",
+      "strokeWidth": 1,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  starttimestamp AS \"time\",\n  sum(upload),\n  posizione\nFROM connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\nGROUP BY posizione, starttimestamp;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Contributo upload per sede",
+      "type": "grafana-piechart-panel",
+      "valueName": "total"
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "Postgres",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 21,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 7,
+      "interval": null,
+      "legend": {
+        "percentage": true,
+        "show": true,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.1.5",
+      "strokeWidth": 1,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  starttimestamp AS \"time\",\n  sum(download),\n  posizione\nFROM connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\nGROUP BY posizione, starttimestamp;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Contributo download per sede",
+      "type": "grafana-piechart-panel",
+      "valueName": "total"
     }
   ],
   "refresh": false,
@@ -514,73 +656,16 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
-            "Circonvallazione Trionfale, 19, Roma",
             "Largo Ascianghi, 4, Roma",
             "Lungotevere in Augusta, 11, Roma",
-            "Piazza Di Porta Metronia, 2, Roma",
-            "Piazza Giuseppe Mazzini, 41, Roma",
-            "Piazza Lovatelli, 35, Roma",
-            "Piazza Orazio Giustiniani, 4, Roma",
-            "Piazza San Pantaleo, 10, Roma",
-            "Piazza del Campidoglio, 1, Roma",
-            "Piazza di Campitelli, 7, Roma",
-            "Piazza di Ponte Umberto I, 1, Roma",
-            "Via 4 Novembre, 94, Roma",
-            "Via Antonio Mordini, 19, Roma",
-            "Via Ennio Quirino Visconti, 13, Roma",
-            "Via Gabriele Camozzi, 4, Roma",
-            "Via Gabriele Camozzi, 8, Roma",
-            "Via Giulia, 25, Roma",
-            "Via Luigi Petroselli, 45, Roma",
-            "Via Luigi Petroselli, 50, Roma",
-            "Via Merulana, 123, Roma",
-            "Via Trionfale, 45, Roma",
-            "Via dei Cerchi, 6, Roma",
-            "Via del Colosseo, 62, Roma",
-            "Via del Tempio di Giove, 21, Roma",
-            "Via del Tempio di Giove, 3, Roma",
-            "Via del Tritone, 142, Roma",
-            "Via della Consolazione, 4, Roma",
-            "Via della Greca, 5, Roma",
-            "Via delle Tre Pile, 1, Roma",
-            "Via di Monte Tarpeo, 41, Roma",
-            "Viale dell'Uccelliera, 1, Roma",
-            "Vicolo del Bottino, 1, Roma"
+            "Piazza Di Porta Metronia, 2, Roma"
           ],
           "value": [
-            "Circonvallazione Trionfale, 19, Roma",
             "Largo Ascianghi, 4, Roma",
             "Lungotevere in Augusta, 11, Roma",
-            "Piazza Di Porta Metronia, 2, Roma",
-            "Piazza Giuseppe Mazzini, 41, Roma",
-            "Piazza Lovatelli, 35, Roma",
-            "Piazza Orazio Giustiniani, 4, Roma",
-            "Piazza San Pantaleo, 10, Roma",
-            "Piazza del Campidoglio, 1, Roma",
-            "Piazza di Campitelli, 7, Roma",
-            "Piazza di Ponte Umberto I, 1, Roma",
-            "Via 4 Novembre, 94, Roma",
-            "Via Antonio Mordini, 19, Roma",
-            "Via Ennio Quirino Visconti, 13, Roma",
-            "Via Gabriele Camozzi, 4, Roma",
-            "Via Gabriele Camozzi, 8, Roma",
-            "Via Giulia, 25, Roma",
-            "Via Luigi Petroselli, 45, Roma",
-            "Via Luigi Petroselli, 50, Roma",
-            "Via Merulana, 123, Roma",
-            "Via Trionfale, 45, Roma",
-            "Via dei Cerchi, 6, Roma",
-            "Via del Colosseo, 62, Roma",
-            "Via del Tempio di Giove, 21, Roma",
-            "Via del Tempio di Giove, 3, Roma",
-            "Via del Tritone, 142, Roma",
-            "Via della Consolazione, 4, Roma",
-            "Via della Greca, 5, Roma",
-            "Via delle Tre Pile, 1, Roma",
-            "Via di Monte Tarpeo, 41, Roma",
-            "Viale dell'Uccelliera, 1, Roma",
-            "Vicolo del Bottino, 1, Roma"
+            "Piazza Di Porta Metronia, 2, Roma"
           ]
         },
         "datasource": "Postgres",
@@ -592,7 +677,7 @@
         "name": "sede",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "Circonvallazione Trionfale, 19, Roma",
             "value": "Circonvallazione Trionfale, 19, Roma"
           },
@@ -612,142 +697,142 @@
             "value": "Piazza Di Porta Metronia, 2, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza Giuseppe Mazzini, 41, Roma",
             "value": "Piazza Giuseppe Mazzini, 41, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza Lovatelli, 35, Roma",
             "value": "Piazza Lovatelli, 35, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza Orazio Giustiniani, 4, Roma",
             "value": "Piazza Orazio Giustiniani, 4, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza San Pantaleo, 10, Roma",
             "value": "Piazza San Pantaleo, 10, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza del Campidoglio, 1, Roma",
             "value": "Piazza del Campidoglio, 1, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza di Campitelli, 7, Roma",
             "value": "Piazza di Campitelli, 7, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Piazza di Ponte Umberto I, 1, Roma",
             "value": "Piazza di Ponte Umberto I, 1, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via 4 Novembre, 94, Roma",
             "value": "Via 4 Novembre, 94, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Antonio Mordini, 19, Roma",
             "value": "Via Antonio Mordini, 19, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Ennio Quirino Visconti, 13, Roma",
             "value": "Via Ennio Quirino Visconti, 13, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Gabriele Camozzi, 4, Roma",
             "value": "Via Gabriele Camozzi, 4, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Gabriele Camozzi, 8, Roma",
             "value": "Via Gabriele Camozzi, 8, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Giulia, 25, Roma",
             "value": "Via Giulia, 25, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Luigi Petroselli, 45, Roma",
             "value": "Via Luigi Petroselli, 45, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Luigi Petroselli, 50, Roma",
             "value": "Via Luigi Petroselli, 50, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Merulana, 123, Roma",
             "value": "Via Merulana, 123, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via Trionfale, 45, Roma",
             "value": "Via Trionfale, 45, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via dei Cerchi, 6, Roma",
             "value": "Via dei Cerchi, 6, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via del Colosseo, 62, Roma",
             "value": "Via del Colosseo, 62, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via del Tempio di Giove, 21, Roma",
             "value": "Via del Tempio di Giove, 21, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via del Tempio di Giove, 3, Roma",
             "value": "Via del Tempio di Giove, 3, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via del Tritone, 142, Roma",
             "value": "Via del Tritone, 142, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via della Consolazione, 4, Roma",
             "value": "Via della Consolazione, 4, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via della Greca, 5, Roma",
             "value": "Via della Greca, 5, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via delle Tre Pile, 1, Roma",
             "value": "Via delle Tre Pile, 1, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Via di Monte Tarpeo, 41, Roma",
             "value": "Via di Monte Tarpeo, 41, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Viale dell'Uccelliera, 1, Roma",
             "value": "Viale dell'Uccelliera, 1, Roma"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Vicolo del Bottino, 1, Roma",
             "value": "Vicolo del Bottino, 1, Roma"
           }
@@ -766,8 +851,8 @@
     ]
   },
   "time": {
-    "from": "2020-09-13T03:27:52.038Z",
-    "to": "2020-09-14T05:45:53.667Z"
+    "from": "2020-08-31T01:33:02.582Z",
+    "to": "2020-08-31T20:58:55.353Z"
   },
   "timepicker": {
     "refresh_intervals": [
