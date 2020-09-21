@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1600531186383,
+  "iteration": 1600676586943,
   "links": [
     {
       "$$hashKey": "object:245",
@@ -36,10 +36,10 @@
         "defaults": {
           "custom": {
             "calculation": "sum",
-            "colorPalette": "interpolateYlGnBu",
+            "colorPalette": "interpolateYlOrRd",
             "colorSpace": "rgb",
             "groupBy": 60,
-            "invertPalette": false,
+            "invertPalette": true,
             "thresholds": {
               "mode": "percentage",
               "steps": [
@@ -142,10 +142,10 @@
         "defaults": {
           "custom": {
             "calculation": "sum",
-            "colorPalette": "interpolateYlGnBu",
+            "colorPalette": "interpolateYlOrRd",
             "colorSpace": "rgb",
             "groupBy": 60,
-            "invertPalette": false,
+            "invertPalette": true,
             "thresholds": {
               "mode": "percentage",
               "steps": [
@@ -180,9 +180,9 @@
               ]
             }
           },
-          "max": 50,
-          "min": 0,
-          "unit": "GB"
+          "decimals": 0,
+          "max": 1000000000,
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -202,7 +202,7 @@
       "pluginVersion": "7.1.5",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1600531186383,
+      "repeatIteration": 1600676586943,
       "repeatPanelId": 9,
       "scopedVars": {
         "municipio": {
@@ -217,7 +217,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)\nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
           "refId": "A",
           "select": [
             [
@@ -250,10 +250,10 @@
         "defaults": {
           "custom": {
             "calculation": "sum",
-            "colorPalette": "interpolateYlGnBu",
+            "colorPalette": "interpolateYlOrRd",
             "colorSpace": "rgb",
             "groupBy": 60,
-            "invertPalette": false,
+            "invertPalette": true,
             "thresholds": {
               "mode": "percentage",
               "steps": [
@@ -288,9 +288,9 @@
               ]
             }
           },
-          "max": 50,
-          "min": 0,
-          "unit": "GB"
+          "decimals": 0,
+          "max": 1000000000,
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -310,7 +310,7 @@
       "pluginVersion": "7.1.5",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1600531186383,
+      "repeatIteration": 1600676586943,
       "repeatPanelId": 9,
       "scopedVars": {
         "municipio": {
@@ -325,7 +325,115 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)::float / 1000000::float \nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)\nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Upload $municipio",
+      "type": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
+      "datasource": "Postgres",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "calculation": "sum",
+            "colorPalette": "interpolateYlOrRd",
+            "colorSpace": "rgb",
+            "groupBy": 60,
+            "invertPalette": true,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 40
+                },
+                {
+                  "color": "blue",
+                  "value": 50
+                },
+                {
+                  "color": "purple",
+                  "value": 60
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 70
+                }
+              ]
+            }
+          },
+          "decimals": 0,
+          "max": 1000000000,
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 12,
+      "maxPerRow": 2,
+      "options": {
+        "from": "6",
+        "showLegend": true,
+        "to": "21"
+      },
+      "pluginVersion": "7.1.5",
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1600676586943,
+      "repeatPanelId": 9,
+      "scopedVars": {
+        "municipio": {
+          "selected": true,
+          "text": "Municipio IV",
+          "value": "Municipio IV"
+        }
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  starttimestamp AS time,\n  sum(upload)\nFROM \n  connessioni \nWHERE \n  municipio in ($municipio) and \n  EXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\n  posizione in ($sede)\ngroup by starttimestamp;\n",
           "refId": "A",
           "select": [
             [
@@ -367,12 +475,14 @@
           "text": [
             "Municipio I",
             "Municipio II",
-            "Municipio III"
+            "Municipio III",
+            "Municipio IV"
           ],
           "value": [
             "Municipio I",
             "Municipio II",
-            "Municipio III"
+            "Municipio III",
+            "Municipio IV"
           ]
         },
         "datasource": "Postgres",
@@ -404,7 +514,7 @@
             "value": "Municipio III"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Municipio IV",
             "value": "Municipio IV"
           },
@@ -479,7 +589,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "Circonvallazione Trionfale, 19, Roma",
             "Largo Ascianghi, 4, Roma",
@@ -610,6 +719,11 @@
             "value": "Piazza Di Porta Metronia, 2, Roma"
           },
           {
+            "selected": false,
+            "text": "Piazza Giuseppe Gola, 61, Roma",
+            "value": "Piazza Giuseppe Gola, 61, Roma"
+          },
+          {
             "selected": true,
             "text": "Piazza Giuseppe Mazzini, 41, Roma",
             "value": "Piazza Giuseppe Mazzini, 41, Roma"
@@ -628,6 +742,16 @@
             "selected": true,
             "text": "Piazza Orazio Giustiniani, 4, Roma",
             "value": "Piazza Orazio Giustiniani, 4, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Piazza Paolo Rossi, 6, Roma",
+            "value": "Piazza Paolo Rossi, 6, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Piazza Riccardo Balsamo Crivelli, 66, Roma",
+            "value": "Piazza Riccardo Balsamo Crivelli, 66, Roma"
           },
           {
             "selected": true,
@@ -655,9 +779,19 @@
             "value": "Piazza di Ponte Umberto I, 1, Roma"
           },
           {
+            "selected": false,
+            "text": "Piazzale Hegel, 14, Roma",
+            "value": "Piazzale Hegel, 14, Roma"
+          },
+          {
             "selected": true,
             "text": "Via 4 Novembre, 94, Roma",
             "value": "Via 4 Novembre, 94, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Amedeo Sommovigo, 40, Roma",
+            "value": "Via Amedeo Sommovigo, 40, Roma"
           },
           {
             "selected": true,
@@ -665,9 +799,19 @@
             "value": "Via Antonio Mordini, 19, Roma"
           },
           {
+            "selected": false,
+            "text": "Via Calcinaia, 44, Roma",
+            "value": "Via Calcinaia, 44, Roma"
+          },
+          {
             "selected": true,
             "text": "Via Campania, 63, Roma",
             "value": "Via Campania, 63, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Canterano, 12, Roma",
+            "value": "Via Canterano, 12, Roma"
           },
           {
             "selected": true,
@@ -678,6 +822,26 @@
             "selected": true,
             "text": "Via Ennio Quirino Visconti, 13, Roma",
             "value": "Via Ennio Quirino Visconti, 13, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Eufrasia Martinetti, 21, Roma",
+            "value": "Via Eufrasia Martinetti, 21, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Fabriano, 59, Roma",
+            "value": "Via Fabriano, 59, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Federigo Verdinois, 54, Roma",
+            "value": "Via Federigo Verdinois, 54, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Fermo Corni, 20, Roma",
+            "value": "Via Fermo Corni, 20, Roma"
           },
           {
             "selected": true,
@@ -735,6 +899,11 @@
             "value": "Via Nomentana, 70, Roma"
           },
           {
+            "selected": false,
+            "text": "Via Pollenza, 54, Roma",
+            "value": "Via Pollenza, 54, Roma"
+          },
+          {
             "selected": true,
             "text": "Via Savoia, 13, Roma",
             "value": "Via Savoia, 13, Roma"
@@ -743,6 +912,11 @@
             "selected": true,
             "text": "Via Tiburtina Antica, 25, Roma",
             "value": "Via Tiburtina Antica, 25, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via Tiburtina, 1163, Roma",
+            "value": "Via Tiburtina, 1163, Roma"
           },
           {
             "selected": true,
@@ -813,6 +987,11 @@
             "selected": true,
             "text": "Via di Monte Tarpeo, 41, Roma",
             "value": "Via di Monte Tarpeo, 41, Roma"
+          },
+          {
+            "selected": false,
+            "text": "Via di San Romano, 14/A, Roma",
+            "value": "Via di San Romano, 14/A, Roma"
           },
           {
             "selected": true,
