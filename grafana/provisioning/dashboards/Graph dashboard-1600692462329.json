@@ -1,0 +1,1822 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "iteration": 1600692353659,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Dashboards",
+      "type": "dashboards"
+    }
+  ],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 600,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  upload,\n  posizione\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\ngroup by posizione, starttimestamp, upload\norder by posizione;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Valori di upload per sede",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": -6,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "decimals": null,
+          "format": "decbytes",
+          "label": "",
+          "logBase": 10,
+          "max": null,
+          "min": "-10",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 20
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 600,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  download,\n  posizione\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\ngroup by posizione, starttimestamp, download\norder by posizione;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Valori di download per sede",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": -6,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "decimals": null,
+          "format": "decbytes",
+          "label": "",
+          "logBase": 10,
+          "max": null,
+          "min": "-10",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 20
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "decimals": 2,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 600,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 0.5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  duration,\n  posizione\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\ngroup by posizione, starttimestamp, duration\norder by posizione;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Durata totale sessione per sede",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "series",
+        "name": null,
+        "show": false,
+        "values": [
+          "total"
+        ]
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "decimals": null,
+          "format": "s",
+          "label": "",
+          "logBase": 10,
+          "max": null,
+          "min": "-10",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 2
+      }
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "Postgres",
+      "decimals": 1,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 6,
+      "interval": null,
+      "legend": {
+        "header": "Totale",
+        "percentage": true,
+        "percentageDecimals": 2,
+        "show": true,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.1.5",
+      "strokeWidth": "1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  starttimestamp AS \"time\",\n  sum(upload),\n  posizione\nFROM connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\nGROUP BY posizione, starttimestamp;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Contributo upload per sede",
+      "type": "grafana-piechart-panel",
+      "valueName": "total"
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "",
+        "threshold": ""
+      },
+      "datasource": "Postgres",
+      "decimals": 1,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 7,
+      "interval": null,
+      "legend": {
+        "header": "Totale",
+        "percentage": true,
+        "percentageDecimals": 2,
+        "show": true,
+        "sideWidth": null,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.1.5",
+      "strokeWidth": "1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  starttimestamp AS \"time\",\n  sum(download),\n  posizione\nFROM connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\nGROUP BY posizione, starttimestamp;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Contributo download per sede",
+      "type": "grafana-piechart-panel",
+      "valueName": "total"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": [
+            "Municipio I",
+            "Municipio II",
+            "Municipio III",
+            "Municipio IV",
+            "Municipio IX",
+            "Municipio V",
+            "Municipio VI",
+            "Municipio VII",
+            "Municipio VIII",
+            "Municipio X",
+            "Municipio XI",
+            "Municipio XII",
+            "Municipio XIII",
+            "Municipio XIV",
+            "Municipio XV"
+          ],
+          "value": [
+            "Municipio I",
+            "Municipio II",
+            "Municipio III",
+            "Municipio IV",
+            "Municipio IX",
+            "Municipio V",
+            "Municipio VI",
+            "Municipio VII",
+            "Municipio VIII",
+            "Municipio X",
+            "Municipio XI",
+            "Municipio XII",
+            "Municipio XIII",
+            "Municipio XIV",
+            "Municipio XV"
+          ]
+        },
+        "datasource": "Postgres",
+        "definition": "select municipio from connessioni group by municipio;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Municipio",
+        "multi": true,
+        "name": "municipio",
+        "options": [
+          {
+            "selected": true,
+            "text": "Municipio I",
+            "value": "Municipio I"
+          },
+          {
+            "selected": true,
+            "text": "Municipio II",
+            "value": "Municipio II"
+          },
+          {
+            "selected": true,
+            "text": "Municipio III",
+            "value": "Municipio III"
+          },
+          {
+            "selected": true,
+            "text": "Municipio IV",
+            "value": "Municipio IV"
+          },
+          {
+            "selected": true,
+            "text": "Municipio IX",
+            "value": "Municipio IX"
+          },
+          {
+            "selected": true,
+            "text": "Municipio V",
+            "value": "Municipio V"
+          },
+          {
+            "selected": true,
+            "text": "Municipio VI",
+            "value": "Municipio VI"
+          },
+          {
+            "selected": true,
+            "text": "Municipio VII",
+            "value": "Municipio VII"
+          },
+          {
+            "selected": true,
+            "text": "Municipio VIII",
+            "value": "Municipio VIII"
+          },
+          {
+            "selected": true,
+            "text": "Municipio X",
+            "value": "Municipio X"
+          },
+          {
+            "selected": true,
+            "text": "Municipio XI",
+            "value": "Municipio XI"
+          },
+          {
+            "selected": true,
+            "text": "Municipio XII",
+            "value": "Municipio XII"
+          },
+          {
+            "selected": true,
+            "text": "Municipio XIII",
+            "value": "Municipio XIII"
+          },
+          {
+            "selected": true,
+            "text": "Municipio XIV",
+            "value": "Municipio XIV"
+          },
+          {
+            "selected": true,
+            "text": "Municipio XV",
+            "value": "Municipio XV"
+          }
+        ],
+        "query": "select municipio from connessioni group by municipio;",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": [
+            "Circonvallazione Ostiense, 191, Roma",
+            "Circonvallazione Trionfale, 19, Roma",
+            "Largo Alessandrina Ravizza, 2, Roma",
+            "Largo Ascianghi, 4, Roma",
+            "Largo Beato Placido Riccardi, 13, Roma",
+            "Largo Castelseprio, 9, Roma",
+            "Largo delle Sette Chiese, 25, Roma",
+            "Lungotevere in Augusta, 11, Roma",
+            "Piazza Cesare De Cupis, 20, Roma",
+            "Piazza Di Porta Metronia, 2, Roma",
+            "Piazza Francesco Zambeccari, 19, Roma",
+            "Piazza Giovanni Agnelli, 10, Roma",
+            "Piazza Giuseppe Gola, 61, Roma",
+            "Piazza Giuseppe Mazzini, 41, Roma",
+            "Piazza Grecia, 23/25, Roma",
+            "Piazza Lovatelli, 35, Roma",
+            "Piazza Orazio Giustiniani, 4, Roma",
+            "Piazza Paolo Rossi, 6, Roma",
+            "Piazza Riccardo Balsamo Crivelli, 66, Roma",
+            "Piazza San Pantaleo, 10, Roma",
+            "Piazza Santa Maria della Pieta, 5, Roma",
+            "Piazza Sempione, 15, Roma",
+            "Piazza del Campidoglio, 1, Roma",
+            "Piazza di Campitelli, 7, Roma",
+            "Piazza di Cinecitta, 11, Roma",
+            "Piazza di CinecittÃ , 11, Roma",
+            "Piazza di Ponte Umberto I, 1, Roma",
+            "Piazzale Hegel, 14, Roma",
+            "Via 4 Novembre, 94, Roma",
+            "Via Adriano I, 4, Roma",
+            "Via Alessandro Severo, 212, Roma",
+            "Via Amedeo Sommovigo, 40, Roma",
+            "Via Anagni, 48, Roma",
+            "Via Antonio Mordini, 19, Roma",
+            "Via Appiano, 15, Roma",
+            "Via Aurelia, 470, Roma",
+            "Via Benedetto Croce, 48/D, Roma",
+            "Via Benedetto Croce, 50, Roma",
+            "Via Calcinaia, 44, Roma",
+            "Via Calimera, 133, Roma",
+            "Via Camillo Manfroni, 9, Roma",
+            "Via Camillo Montalcini, 1, Roma",
+            "Via Campania, 63, Roma",
+            "Via Canterano, 12, Roma",
+            "Via Capitan Bavastro, 94, Roma",
+            "Via Cassia, 472, Roma",
+            "Via Cassia, 726, Roma",
+            "Via Claudio, 1, Roma",
+            "Via Cornelia, 45, Roma",
+            "Via Costantino Beschi, 12, Roma",
+            "Via Cristoforo Colombo, 570, Roma",
+            "Via Cutigliano, 82, Roma",
+            "Via Dei Salici, 27, Roma",
+            "Via Dino Penazzato, 112, Roma",
+            "Via Dire Daua, 11, Roma",
+            "Via Domenico Lupatelli, 2, Roma",
+            "Via Ennio Quirino Visconti, 13, Roma",
+            "Via Ettore Stampini, 38, Roma",
+            "Via Eufrasia Martinetti, 21, Roma",
+            "Via Euripide, 15, Roma",
+            "Via Fabiola, 14, Roma",
+            "Via Fabiola, 15, Roma",
+            "Via Fabriano, 59, Roma",
+            "Via Federico Borromeo, 67, Roma",
+            "Via Federigo Verdinois, 54, Roma",
+            "Via Fermo Corni, 20, Roma",
+            "Via Flaminia, 872, Roma",
+            "Via Flavio Ando, 12, Roma",
+            "Via Fonteiana, 111, Roma",
+            "Via Gabriele Camozzi, 4, Roma",
+            "Via Gabriele Camozzi, 8, Roma",
+            "Via Gerolamo Cardano, 135, Roma",
+            "Via Giorgio Perlasca, 39, Roma",
+            "Via Giovanni Frignani, 97, Roma",
+            "Via Giulia, 25, Roma",
+            "Via Giuliano Da Sangallo, 11, Roma",
+            "Via Goito, 35, Roma",
+            "Via Ignazio  Silone, 100, Roma",
+            "Via Jaime Pintor, 6, Roma",
+            "Via Libero Leonardi, 153, Roma",
+            "Via Luigi Chiarini, 400, Roma",
+            "Via Luigi Petroselli, 45, Roma",
+            "Via Luigi Petroselli, 50, Roma",
+            "Via Lusitania, 16, Roma",
+            "Via Marino Mazzacurati, 73/75, Roma",
+            "Via Mattia Battistini, 464, Roma",
+            "Via Merulana, 123, Roma",
+            "Via Monte Ruggero, 39, Roma",
+            "Via Nicola Mascardi, 11, Roma",
+            "Via Nomentana, 70, Roma",
+            "Via Ostiense, 106, Roma",
+            "Via Ostuni, 8, Roma",
+            "Via Padre Reginaldo Giuliani, 15, Roma",
+            "Via Paola Falconieri, 38, Roma",
+            "Via Paolo Renzi, 47, Roma",
+            "Via Pieve Fosciana, 6, Roma",
+            "Via Poggio Ameno, 23, Roma",
+            "Via Pollenza, 54, Roma",
+            "Via Portuense, 579, Roma",
+            "Via Prenestina, 510, Roma",
+            "Via Rugantino, 113, Roma",
+            "Via Santi Savarino, 16, Roma",
+            "Via Savoia, 13, Roma",
+            "Via Tiburtina Antica, 25, Roma",
+            "Via Tiburtina, 1163, Roma",
+            "Via Tommaso Fortifiocca, 71, Roma",
+            "Via Torre Annunziata, 1, Roma",
+            "Via Trionfale, 45, Roma",
+            "Via Trionfale, 7333, Roma",
+            "Via Tuscolana, 950, Roma",
+            "Via Ulisse Aldrovandi, 18, Roma",
+            "Via Umberto Nistri, 11, Roma",
+            "Via Val Maggia, 21, Roma",
+            "Via Val di Lanzo, 187, Roma",
+            "Via Via dei Lincei, 93, Roma",
+            "Via dei Cerchi, 6, Roma",
+            "Via del Colosseo, 62, Roma",
+            "Via del Forte Braschi, 93/A, Roma",
+            "Via del Martin Pescatore, 66, Roma",
+            "Via del Monte delle Capre, 37, Roma",
+            "Via del Pigneto, 22, Roma",
+            "Via del Pigneto, 301/A, Roma",
+            "Via del Tempio di Giove, 21, Roma",
+            "Via del Tempio di Giove, 3, Roma",
+            "Via del Tritone, 142, Roma",
+            "Via del Tufo, 27, Roma",
+            "Via del Turismo, 30/32, Roma",
+            "Via della Casetta Mattei, 279, Roma",
+            "Via della Consolazione, 4, Roma",
+            "Via della Greca, 5, Roma",
+            "Via della Pisana, 306, Roma",
+            "Via delle Tre Pile, 1, Roma",
+            "Via di Casalotti, 87/B, Roma",
+            "Via di Decima, 96/102, Roma",
+            "Via di Donna Olimpia, 43, Roma",
+            "Via di Monte Tarpeo, 41, Roma",
+            "Via di Porta San Sebastiano, 2, Roma",
+            "Via di San Romano, 14/A, Roma",
+            "Via di Scorticabove, 77, Roma",
+            "Viale Adriatico, 140, Roma",
+            "Viale Africa, 109, Roma",
+            "Viale Duilio Cambellotti, 11, Roma",
+            "Viale Partenope, 55, Roma",
+            "Viale San Giovanni Bosco, 125, Roma",
+            "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
+            "Viale del Lido, 6, Roma",
+            "Viale dell'Oceano Indiano, 64, Roma",
+            "Viale dell'Oceano Pacifico, 83, Roma",
+            "Viale dell'Uccelliera, 1, Roma",
+            "Viale della Civilta del Lavoro, 10, Roma",
+            "Viale della CiviltÃ  del Lavoro, 10, Roma",
+            "Viale della Previdenza Sociale, 20, Roma",
+            "Viale della Primavera, 207, Roma",
+            "Vicolo del Bottino, 1, Roma"
+          ],
+          "value": [
+            "Circonvallazione Ostiense, 191, Roma",
+            "Circonvallazione Trionfale, 19, Roma",
+            "Largo Alessandrina Ravizza, 2, Roma",
+            "Largo Ascianghi, 4, Roma",
+            "Largo Beato Placido Riccardi, 13, Roma",
+            "Largo Castelseprio, 9, Roma",
+            "Largo delle Sette Chiese, 25, Roma",
+            "Lungotevere in Augusta, 11, Roma",
+            "Piazza Cesare De Cupis, 20, Roma",
+            "Piazza Di Porta Metronia, 2, Roma",
+            "Piazza Francesco Zambeccari, 19, Roma",
+            "Piazza Giovanni Agnelli, 10, Roma",
+            "Piazza Giuseppe Gola, 61, Roma",
+            "Piazza Giuseppe Mazzini, 41, Roma",
+            "Piazza Grecia, 23/25, Roma",
+            "Piazza Lovatelli, 35, Roma",
+            "Piazza Orazio Giustiniani, 4, Roma",
+            "Piazza Paolo Rossi, 6, Roma",
+            "Piazza Riccardo Balsamo Crivelli, 66, Roma",
+            "Piazza San Pantaleo, 10, Roma",
+            "Piazza Santa Maria della Pieta, 5, Roma",
+            "Piazza Sempione, 15, Roma",
+            "Piazza del Campidoglio, 1, Roma",
+            "Piazza di Campitelli, 7, Roma",
+            "Piazza di Cinecitta, 11, Roma",
+            "Piazza di CinecittÃ , 11, Roma",
+            "Piazza di Ponte Umberto I, 1, Roma",
+            "Piazzale Hegel, 14, Roma",
+            "Via 4 Novembre, 94, Roma",
+            "Via Adriano I, 4, Roma",
+            "Via Alessandro Severo, 212, Roma",
+            "Via Amedeo Sommovigo, 40, Roma",
+            "Via Anagni, 48, Roma",
+            "Via Antonio Mordini, 19, Roma",
+            "Via Appiano, 15, Roma",
+            "Via Aurelia, 470, Roma",
+            "Via Benedetto Croce, 48/D, Roma",
+            "Via Benedetto Croce, 50, Roma",
+            "Via Calcinaia, 44, Roma",
+            "Via Calimera, 133, Roma",
+            "Via Camillo Manfroni, 9, Roma",
+            "Via Camillo Montalcini, 1, Roma",
+            "Via Campania, 63, Roma",
+            "Via Canterano, 12, Roma",
+            "Via Capitan Bavastro, 94, Roma",
+            "Via Cassia, 472, Roma",
+            "Via Cassia, 726, Roma",
+            "Via Claudio, 1, Roma",
+            "Via Cornelia, 45, Roma",
+            "Via Costantino Beschi, 12, Roma",
+            "Via Cristoforo Colombo, 570, Roma",
+            "Via Cutigliano, 82, Roma",
+            "Via Dei Salici, 27, Roma",
+            "Via Dino Penazzato, 112, Roma",
+            "Via Dire Daua, 11, Roma",
+            "Via Domenico Lupatelli, 2, Roma",
+            "Via Ennio Quirino Visconti, 13, Roma",
+            "Via Ettore Stampini, 38, Roma",
+            "Via Eufrasia Martinetti, 21, Roma",
+            "Via Euripide, 15, Roma",
+            "Via Fabiola, 14, Roma",
+            "Via Fabiola, 15, Roma",
+            "Via Fabriano, 59, Roma",
+            "Via Federico Borromeo, 67, Roma",
+            "Via Federigo Verdinois, 54, Roma",
+            "Via Fermo Corni, 20, Roma",
+            "Via Flaminia, 872, Roma",
+            "Via Flavio Ando, 12, Roma",
+            "Via Fonteiana, 111, Roma",
+            "Via Gabriele Camozzi, 4, Roma",
+            "Via Gabriele Camozzi, 8, Roma",
+            "Via Gerolamo Cardano, 135, Roma",
+            "Via Giorgio Perlasca, 39, Roma",
+            "Via Giovanni Frignani, 97, Roma",
+            "Via Giulia, 25, Roma",
+            "Via Giuliano Da Sangallo, 11, Roma",
+            "Via Goito, 35, Roma",
+            "Via Ignazio  Silone, 100, Roma",
+            "Via Jaime Pintor, 6, Roma",
+            "Via Libero Leonardi, 153, Roma",
+            "Via Luigi Chiarini, 400, Roma",
+            "Via Luigi Petroselli, 45, Roma",
+            "Via Luigi Petroselli, 50, Roma",
+            "Via Lusitania, 16, Roma",
+            "Via Marino Mazzacurati, 73/75, Roma",
+            "Via Mattia Battistini, 464, Roma",
+            "Via Merulana, 123, Roma",
+            "Via Monte Ruggero, 39, Roma",
+            "Via Nicola Mascardi, 11, Roma",
+            "Via Nomentana, 70, Roma",
+            "Via Ostiense, 106, Roma",
+            "Via Ostuni, 8, Roma",
+            "Via Padre Reginaldo Giuliani, 15, Roma",
+            "Via Paola Falconieri, 38, Roma",
+            "Via Paolo Renzi, 47, Roma",
+            "Via Pieve Fosciana, 6, Roma",
+            "Via Poggio Ameno, 23, Roma",
+            "Via Pollenza, 54, Roma",
+            "Via Portuense, 579, Roma",
+            "Via Prenestina, 510, Roma",
+            "Via Rugantino, 113, Roma",
+            "Via Santi Savarino, 16, Roma",
+            "Via Savoia, 13, Roma",
+            "Via Tiburtina Antica, 25, Roma",
+            "Via Tiburtina, 1163, Roma",
+            "Via Tommaso Fortifiocca, 71, Roma",
+            "Via Torre Annunziata, 1, Roma",
+            "Via Trionfale, 45, Roma",
+            "Via Trionfale, 7333, Roma",
+            "Via Tuscolana, 950, Roma",
+            "Via Ulisse Aldrovandi, 18, Roma",
+            "Via Umberto Nistri, 11, Roma",
+            "Via Val Maggia, 21, Roma",
+            "Via Val di Lanzo, 187, Roma",
+            "Via Via dei Lincei, 93, Roma",
+            "Via dei Cerchi, 6, Roma",
+            "Via del Colosseo, 62, Roma",
+            "Via del Forte Braschi, 93/A, Roma",
+            "Via del Martin Pescatore, 66, Roma",
+            "Via del Monte delle Capre, 37, Roma",
+            "Via del Pigneto, 22, Roma",
+            "Via del Pigneto, 301/A, Roma",
+            "Via del Tempio di Giove, 21, Roma",
+            "Via del Tempio di Giove, 3, Roma",
+            "Via del Tritone, 142, Roma",
+            "Via del Tufo, 27, Roma",
+            "Via del Turismo, 30/32, Roma",
+            "Via della Casetta Mattei, 279, Roma",
+            "Via della Consolazione, 4, Roma",
+            "Via della Greca, 5, Roma",
+            "Via della Pisana, 306, Roma",
+            "Via delle Tre Pile, 1, Roma",
+            "Via di Casalotti, 87/B, Roma",
+            "Via di Decima, 96/102, Roma",
+            "Via di Donna Olimpia, 43, Roma",
+            "Via di Monte Tarpeo, 41, Roma",
+            "Via di Porta San Sebastiano, 2, Roma",
+            "Via di San Romano, 14/A, Roma",
+            "Via di Scorticabove, 77, Roma",
+            "Viale Adriatico, 140, Roma",
+            "Viale Africa, 109, Roma",
+            "Viale Duilio Cambellotti, 11, Roma",
+            "Viale Partenope, 55, Roma",
+            "Viale San Giovanni Bosco, 125, Roma",
+            "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
+            "Viale del Lido, 6, Roma",
+            "Viale dell'Oceano Indiano, 64, Roma",
+            "Viale dell'Oceano Pacifico, 83, Roma",
+            "Viale dell'Uccelliera, 1, Roma",
+            "Viale della Civilta del Lavoro, 10, Roma",
+            "Viale della CiviltÃ  del Lavoro, 10, Roma",
+            "Viale della Previdenza Sociale, 20, Roma",
+            "Viale della Primavera, 207, Roma",
+            "Vicolo del Bottino, 1, Roma"
+          ]
+        },
+        "datasource": "Postgres",
+        "definition": "select posizione from connessioni where municipio in ($municipio) group by posizione;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Sede",
+        "multi": true,
+        "name": "sede",
+        "options": [
+          {
+            "selected": true,
+            "text": "Circonvallazione Ostiense, 191, Roma",
+            "value": "Circonvallazione Ostiense, 191, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Circonvallazione Trionfale, 19, Roma",
+            "value": "Circonvallazione Trionfale, 19, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Largo Alessandrina Ravizza, 2, Roma",
+            "value": "Largo Alessandrina Ravizza, 2, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Largo Ascianghi, 4, Roma",
+            "value": "Largo Ascianghi, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Largo Beato Placido Riccardi, 13, Roma",
+            "value": "Largo Beato Placido Riccardi, 13, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Largo Castelseprio, 9, Roma",
+            "value": "Largo Castelseprio, 9, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Largo delle Sette Chiese, 25, Roma",
+            "value": "Largo delle Sette Chiese, 25, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Lungotevere in Augusta, 11, Roma",
+            "value": "Lungotevere in Augusta, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Cesare De Cupis, 20, Roma",
+            "value": "Piazza Cesare De Cupis, 20, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Di Porta Metronia, 2, Roma",
+            "value": "Piazza Di Porta Metronia, 2, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Francesco Zambeccari, 19, Roma",
+            "value": "Piazza Francesco Zambeccari, 19, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Giovanni Agnelli, 10, Roma",
+            "value": "Piazza Giovanni Agnelli, 10, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Giuseppe Gola, 61, Roma",
+            "value": "Piazza Giuseppe Gola, 61, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Giuseppe Mazzini, 41, Roma",
+            "value": "Piazza Giuseppe Mazzini, 41, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Grecia, 23/25, Roma",
+            "value": "Piazza Grecia, 23/25, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Lovatelli, 35, Roma",
+            "value": "Piazza Lovatelli, 35, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Orazio Giustiniani, 4, Roma",
+            "value": "Piazza Orazio Giustiniani, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Paolo Rossi, 6, Roma",
+            "value": "Piazza Paolo Rossi, 6, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Riccardo Balsamo Crivelli, 66, Roma",
+            "value": "Piazza Riccardo Balsamo Crivelli, 66, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza San Pantaleo, 10, Roma",
+            "value": "Piazza San Pantaleo, 10, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Santa Maria della Pieta, 5, Roma",
+            "value": "Piazza Santa Maria della Pieta, 5, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza Sempione, 15, Roma",
+            "value": "Piazza Sempione, 15, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza del Campidoglio, 1, Roma",
+            "value": "Piazza del Campidoglio, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza di Campitelli, 7, Roma",
+            "value": "Piazza di Campitelli, 7, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza di Cinecitta, 11, Roma",
+            "value": "Piazza di Cinecitta, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza di CinecittÃ , 11, Roma",
+            "value": "Piazza di CinecittÃ , 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazza di Ponte Umberto I, 1, Roma",
+            "value": "Piazza di Ponte Umberto I, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Piazzale Hegel, 14, Roma",
+            "value": "Piazzale Hegel, 14, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via 4 Novembre, 94, Roma",
+            "value": "Via 4 Novembre, 94, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Adriano I, 4, Roma",
+            "value": "Via Adriano I, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Alessandro Severo, 212, Roma",
+            "value": "Via Alessandro Severo, 212, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Amedeo Sommovigo, 40, Roma",
+            "value": "Via Amedeo Sommovigo, 40, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Anagni, 48, Roma",
+            "value": "Via Anagni, 48, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Antonio Mordini, 19, Roma",
+            "value": "Via Antonio Mordini, 19, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Appiano, 15, Roma",
+            "value": "Via Appiano, 15, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Aurelia, 470, Roma",
+            "value": "Via Aurelia, 470, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Benedetto Croce, 48/D, Roma",
+            "value": "Via Benedetto Croce, 48/D, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Benedetto Croce, 50, Roma",
+            "value": "Via Benedetto Croce, 50, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Calcinaia, 44, Roma",
+            "value": "Via Calcinaia, 44, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Calimera, 133, Roma",
+            "value": "Via Calimera, 133, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Camillo Manfroni, 9, Roma",
+            "value": "Via Camillo Manfroni, 9, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Camillo Montalcini, 1, Roma",
+            "value": "Via Camillo Montalcini, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Campania, 63, Roma",
+            "value": "Via Campania, 63, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Canterano, 12, Roma",
+            "value": "Via Canterano, 12, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Capitan Bavastro, 94, Roma",
+            "value": "Via Capitan Bavastro, 94, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Cassia, 472, Roma",
+            "value": "Via Cassia, 472, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Cassia, 726, Roma",
+            "value": "Via Cassia, 726, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Claudio, 1, Roma",
+            "value": "Via Claudio, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Cornelia, 45, Roma",
+            "value": "Via Cornelia, 45, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Costantino Beschi, 12, Roma",
+            "value": "Via Costantino Beschi, 12, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Cristoforo Colombo, 570, Roma",
+            "value": "Via Cristoforo Colombo, 570, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Cutigliano, 82, Roma",
+            "value": "Via Cutigliano, 82, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Dei Salici, 27, Roma",
+            "value": "Via Dei Salici, 27, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Dino Penazzato, 112, Roma",
+            "value": "Via Dino Penazzato, 112, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Dire Daua, 11, Roma",
+            "value": "Via Dire Daua, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Domenico Lupatelli, 2, Roma",
+            "value": "Via Domenico Lupatelli, 2, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Ennio Quirino Visconti, 13, Roma",
+            "value": "Via Ennio Quirino Visconti, 13, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Ettore Stampini, 38, Roma",
+            "value": "Via Ettore Stampini, 38, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Eufrasia Martinetti, 21, Roma",
+            "value": "Via Eufrasia Martinetti, 21, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Euripide, 15, Roma",
+            "value": "Via Euripide, 15, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Fabiola, 14, Roma",
+            "value": "Via Fabiola, 14, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Fabiola, 15, Roma",
+            "value": "Via Fabiola, 15, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Fabriano, 59, Roma",
+            "value": "Via Fabriano, 59, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Federico Borromeo, 67, Roma",
+            "value": "Via Federico Borromeo, 67, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Federigo Verdinois, 54, Roma",
+            "value": "Via Federigo Verdinois, 54, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Fermo Corni, 20, Roma",
+            "value": "Via Fermo Corni, 20, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Flaminia, 872, Roma",
+            "value": "Via Flaminia, 872, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Flavio Ando, 12, Roma",
+            "value": "Via Flavio Ando, 12, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Fonteiana, 111, Roma",
+            "value": "Via Fonteiana, 111, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Gabriele Camozzi, 4, Roma",
+            "value": "Via Gabriele Camozzi, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Gabriele Camozzi, 8, Roma",
+            "value": "Via Gabriele Camozzi, 8, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Gerolamo Cardano, 135, Roma",
+            "value": "Via Gerolamo Cardano, 135, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Giorgio Perlasca, 39, Roma",
+            "value": "Via Giorgio Perlasca, 39, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Giovanni Frignani, 97, Roma",
+            "value": "Via Giovanni Frignani, 97, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Giulia, 25, Roma",
+            "value": "Via Giulia, 25, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Giuliano Da Sangallo, 11, Roma",
+            "value": "Via Giuliano Da Sangallo, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Goito, 35, Roma",
+            "value": "Via Goito, 35, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Ignazio  Silone, 100, Roma",
+            "value": "Via Ignazio  Silone, 100, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Jaime Pintor, 6, Roma",
+            "value": "Via Jaime Pintor, 6, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Libero Leonardi, 153, Roma",
+            "value": "Via Libero Leonardi, 153, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Luigi Chiarini, 400, Roma",
+            "value": "Via Luigi Chiarini, 400, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Luigi Petroselli, 45, Roma",
+            "value": "Via Luigi Petroselli, 45, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Luigi Petroselli, 50, Roma",
+            "value": "Via Luigi Petroselli, 50, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Lusitania, 16, Roma",
+            "value": "Via Lusitania, 16, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Marino Mazzacurati, 73/75, Roma",
+            "value": "Via Marino Mazzacurati, 73/75, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Mattia Battistini, 464, Roma",
+            "value": "Via Mattia Battistini, 464, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Merulana, 123, Roma",
+            "value": "Via Merulana, 123, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Monte Ruggero, 39, Roma",
+            "value": "Via Monte Ruggero, 39, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Nicola Mascardi, 11, Roma",
+            "value": "Via Nicola Mascardi, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Nomentana, 70, Roma",
+            "value": "Via Nomentana, 70, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Ostiense, 106, Roma",
+            "value": "Via Ostiense, 106, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Ostuni, 8, Roma",
+            "value": "Via Ostuni, 8, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Padre Reginaldo Giuliani, 15, Roma",
+            "value": "Via Padre Reginaldo Giuliani, 15, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Paola Falconieri, 38, Roma",
+            "value": "Via Paola Falconieri, 38, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Paolo Renzi, 47, Roma",
+            "value": "Via Paolo Renzi, 47, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Pieve Fosciana, 6, Roma",
+            "value": "Via Pieve Fosciana, 6, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Poggio Ameno, 23, Roma",
+            "value": "Via Poggio Ameno, 23, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Pollenza, 54, Roma",
+            "value": "Via Pollenza, 54, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Portuense, 579, Roma",
+            "value": "Via Portuense, 579, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Prenestina, 510, Roma",
+            "value": "Via Prenestina, 510, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Rugantino, 113, Roma",
+            "value": "Via Rugantino, 113, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Santi Savarino, 16, Roma",
+            "value": "Via Santi Savarino, 16, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Savoia, 13, Roma",
+            "value": "Via Savoia, 13, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Tiburtina Antica, 25, Roma",
+            "value": "Via Tiburtina Antica, 25, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Tiburtina, 1163, Roma",
+            "value": "Via Tiburtina, 1163, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Tommaso Fortifiocca, 71, Roma",
+            "value": "Via Tommaso Fortifiocca, 71, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Torre Annunziata, 1, Roma",
+            "value": "Via Torre Annunziata, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Trionfale, 45, Roma",
+            "value": "Via Trionfale, 45, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Trionfale, 7333, Roma",
+            "value": "Via Trionfale, 7333, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Tuscolana, 950, Roma",
+            "value": "Via Tuscolana, 950, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Ulisse Aldrovandi, 18, Roma",
+            "value": "Via Ulisse Aldrovandi, 18, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Umberto Nistri, 11, Roma",
+            "value": "Via Umberto Nistri, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Val Maggia, 21, Roma",
+            "value": "Via Val Maggia, 21, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Val di Lanzo, 187, Roma",
+            "value": "Via Val di Lanzo, 187, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via Via dei Lincei, 93, Roma",
+            "value": "Via Via dei Lincei, 93, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via dei Cerchi, 6, Roma",
+            "value": "Via dei Cerchi, 6, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Colosseo, 62, Roma",
+            "value": "Via del Colosseo, 62, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Forte Braschi, 93/A, Roma",
+            "value": "Via del Forte Braschi, 93/A, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Martin Pescatore, 66, Roma",
+            "value": "Via del Martin Pescatore, 66, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Monte delle Capre, 37, Roma",
+            "value": "Via del Monte delle Capre, 37, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Pigneto, 22, Roma",
+            "value": "Via del Pigneto, 22, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Pigneto, 301/A, Roma",
+            "value": "Via del Pigneto, 301/A, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tempio di Giove, 21, Roma",
+            "value": "Via del Tempio di Giove, 21, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tempio di Giove, 3, Roma",
+            "value": "Via del Tempio di Giove, 3, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tritone, 142, Roma",
+            "value": "Via del Tritone, 142, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Tufo, 27, Roma",
+            "value": "Via del Tufo, 27, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via del Turismo, 30/32, Roma",
+            "value": "Via del Turismo, 30/32, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via della Casetta Mattei, 279, Roma",
+            "value": "Via della Casetta Mattei, 279, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via della Consolazione, 4, Roma",
+            "value": "Via della Consolazione, 4, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via della Greca, 5, Roma",
+            "value": "Via della Greca, 5, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via della Pisana, 306, Roma",
+            "value": "Via della Pisana, 306, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via delle Tre Pile, 1, Roma",
+            "value": "Via delle Tre Pile, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Casalotti, 87/B, Roma",
+            "value": "Via di Casalotti, 87/B, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Decima, 96/102, Roma",
+            "value": "Via di Decima, 96/102, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Donna Olimpia, 43, Roma",
+            "value": "Via di Donna Olimpia, 43, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Monte Tarpeo, 41, Roma",
+            "value": "Via di Monte Tarpeo, 41, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Porta San Sebastiano, 2, Roma",
+            "value": "Via di Porta San Sebastiano, 2, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di San Romano, 14/A, Roma",
+            "value": "Via di San Romano, 14/A, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Via di Scorticabove, 77, Roma",
+            "value": "Via di Scorticabove, 77, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale Adriatico, 140, Roma",
+            "value": "Viale Adriatico, 140, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale Africa, 109, Roma",
+            "value": "Viale Africa, 109, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale Duilio Cambellotti, 11, Roma",
+            "value": "Viale Duilio Cambellotti, 11, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale Partenope, 55, Roma",
+            "value": "Viale Partenope, 55, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale San Giovanni Bosco, 125, Roma",
+            "value": "Viale San Giovanni Bosco, 125, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale dei Caduti nella Guerra di Liberazione, 258, Roma",
+            "value": "Viale dei Caduti nella Guerra di Liberazione, 258, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale del Lido, 6, Roma",
+            "value": "Viale del Lido, 6, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale dell'Oceano Indiano, 64, Roma",
+            "value": "Viale dell'Oceano Indiano, 64, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale dell'Oceano Pacifico, 83, Roma",
+            "value": "Viale dell'Oceano Pacifico, 83, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale dell'Uccelliera, 1, Roma",
+            "value": "Viale dell'Uccelliera, 1, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale della Civilta del Lavoro, 10, Roma",
+            "value": "Viale della Civilta del Lavoro, 10, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale della CiviltÃ  del Lavoro, 10, Roma",
+            "value": "Viale della CiviltÃ  del Lavoro, 10, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale della Previdenza Sociale, 20, Roma",
+            "value": "Viale della Previdenza Sociale, 20, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Viale della Primavera, 207, Roma",
+            "value": "Viale della Primavera, 207, Roma"
+          },
+          {
+            "selected": true,
+            "text": "Vicolo del Bottino, 1, Roma",
+            "value": "Vicolo del Bottino, 1, Roma"
+          }
+        ],
+        "query": "select posizione from connessioni where municipio in ($municipio) group by posizione;",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2020-08-31T08:36:25.447Z",
+    "to": "2020-08-31T14:50:43.797Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "utc",
+  "title": "Graph dashboard",
+  "uid": "GkPbiPOMz",
+  "version": 1
+}
