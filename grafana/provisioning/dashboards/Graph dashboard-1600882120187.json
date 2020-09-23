@@ -14,90 +14,78 @@
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
-  "iteration": 1600691960567,
+  "graphTooltip": 1,
+  "iteration": 1600881891701,
   "links": [
     {
-      "$$hashKey": "object:245",
+      "$$hashKey": "object:375",
       "asDropdown": true,
       "icon": "external link",
       "includeVars": true,
       "keepTime": true,
       "tags": [],
-      "targetBlank": true,
+      "targetBlank": false,
       "title": "Dashboards",
       "type": "dashboards"
     }
   ],
   "panels": [
     {
-      "collapsed": false,
-      "datasource": null,
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
-        "h": 1,
+        "h": 6,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 11,
-      "panels": [],
-      "title": "Download diviso per sedi",
-      "type": "row"
-    },
-    {
-      "circleMaxSize": "5",
-      "circleMinSize": "3",
-      "colors": [
-        "#37872D",
-        "#E0B400",
-        "#FF9830",
-        "#F2495C"
-      ],
-      "datasource": "Postgres",
-      "decimals": 2,
-      "esMetric": "Count",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 600,
+        "total": true,
+        "values": true
       },
-      "gridPos": {
-        "h": 17,
-        "w": 12,
-        "x": 0,
-        "y": 1
-      },
-      "hideEmpty": true,
-      "hideZero": true,
-      "id": 13,
-      "initialZoom": "11",
-      "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "41.9028",
-      "mapCenterLongitude": "12.4964",
-      "maxDataPoints": 1,
-      "mouseWheelZoom": true,
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "percentage": false,
       "pluginVersion": "7.1.5",
-      "repeatDirection": "v",
-      "showLegend": true,
-      "stickyLabels": false,
-      "tableQueryOptions": {
-        "geohashField": "geohash",
-        "labelField": "posizione",
-        "latitudeField": "latitudine",
-        "longitudeField": "longitudine",
-        "metricField": "tipologia",
-        "queryType": "coordinates"
-      },
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "format": "table",
+          "format": "time_series",
           "group": [],
-          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select posizione, longitudine, latitudine, (sum(download)::float / 1000000000::float) as tipologia from connessioni \nwhere municipio in ($municipio) and \nEXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\nposizione in ($sede)\ngroup by (posizione, longitudine, latitudine);\n",
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  upload,\n  posizione\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\ngroup by posizione, starttimestamp, upload\norder by posizione;",
           "refId": "A",
           "select": [
             [
@@ -119,172 +107,343 @@
           ]
         }
       ],
-      "thresholds": "2, 5, 15",
+      "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Totale",
-      "transformations": [],
-      "type": "grafana-worldmap-panel",
-      "unitPlural": "GB",
-      "unitSingle": "",
-      "unitSingular": "GB",
-      "valueName": "total"
+      "title": "Valori di upload per sede",
+      "tooltip": {
+        "shared": false,
+        "sort": 1,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": -6,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "decimals": null,
+          "format": "decbytes",
+          "label": "",
+          "logBase": 10,
+          "max": null,
+          "min": "-10",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 20
+      }
     },
     {
-      "circleMaxSize": "5",
-      "circleMinSize": "3",
-      "colors": [
-        "#37872D",
-        "#E0B400",
-        "#FF9830",
-        "#F2495C"
-      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": "Postgres",
       "decimals": 2,
-      "esMetric": "Count",
       "fieldConfig": {
         "defaults": {
           "custom": {}
         },
         "overrides": []
       },
+      "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
-        "h": 17,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "hideEmpty": true,
-      "hideZero": true,
-      "id": 14,
-      "initialZoom": "11",
-      "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "41.9028",
-      "mapCenterLongitude": "12.4964",
-      "maxDataPoints": 1,
-      "mouseWheelZoom": true,
-      "pluginVersion": "7.1.5",
-      "repeatDirection": "v",
-      "showLegend": true,
-      "stickyLabels": false,
-      "tableQueryOptions": {
-        "geohashField": "geohash",
-        "labelField": "posizione",
-        "latitudeField": "latitudine",
-        "longitudeField": "longitudine",
-        "metricField": "tipologia",
-        "queryType": "coordinates"
-      },
-      "targets": [
-        {
-          "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "select posizione, longitudine, latitudine, (max(download)::float / 1000000000::float) as tipologia from connessioni \nwhere municipio in ($municipio) and \nEXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\nposizione in ($sede)\ngroup by (posizione, longitudine, latitudine);\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": "2, 5, 15",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Picco",
-      "transformations": [],
-      "type": "grafana-worldmap-panel",
-      "unitPlural": "GB",
-      "unitSingle": "",
-      "unitSingular": "GB",
-      "valueName": "max"
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
+        "h": 6,
         "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 600,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  download,\n  posizione\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\ngroup by posizione, starttimestamp, download\norder by posizione;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Valori di download per sede",
+      "tooltip": {
+        "shared": false,
+        "sort": 1,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": -6,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "decimals": null,
+          "format": "decbytes",
+          "label": "",
+          "logBase": 10,
+          "max": null,
+          "min": "-10",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 20
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "decimals": 2,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 600,
+        "total": true,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 0.5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  duration,\n  posizione\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\ngroup by posizione, starttimestamp, duration\norder by posizione;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Durata totale sessione per sede",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "series",
+        "name": null,
+        "show": false,
+        "values": [
+          "total"
+        ]
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "decimals": null,
+          "format": "s",
+          "label": "",
+          "logBase": 10,
+          "max": null,
+          "min": "-10",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 2
+      }
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "Postgres",
+      "decimals": 1,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "decbytes",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
         "x": 0,
         "y": 18
       },
-      "id": 8,
-      "panels": [],
-      "repeat": null,
-      "title": "Upload diviso per sedi",
-      "type": "row"
-    },
-    {
-      "circleMaxSize": "5",
-      "circleMinSize": "3",
-      "colors": [
-        "#37872D",
-        "#E0B400",
-        "#FF9830",
-        "#F2495C"
-      ],
-      "datasource": "Postgres",
-      "decimals": 2,
-      "esMetric": "Count",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "id": 6,
+      "interval": null,
+      "legend": {
+        "header": "Totale",
+        "percentage": true,
+        "percentageDecimals": 2,
+        "show": true,
+        "values": true
       },
-      "gridPos": {
-        "h": 18,
-        "w": 12,
-        "x": 0,
-        "y": 19
-      },
-      "hideEmpty": true,
-      "hideZero": true,
-      "id": 9,
-      "initialZoom": "11",
-      "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "41.9028",
-      "mapCenterLongitude": "12.4964",
-      "maxDataPoints": 1,
-      "mouseWheelZoom": true,
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
       "pluginVersion": "7.1.5",
-      "repeatDirection": "v",
-      "showLegend": true,
-      "stickyLabels": false,
-      "tableQueryOptions": {
-        "geohashField": "geohash",
-        "labelField": "posizione",
-        "latitudeField": "latitudine",
-        "longitudeField": "longitudine",
-        "metricField": "tipologia",
-        "queryType": "coordinates"
-      },
+      "strokeWidth": "1",
       "targets": [
         {
-          "format": "table",
+          "format": "time_series",
           "group": [],
-          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select posizione, longitudine, latitudine, (sum(upload)::float / 1000000000::float) as tipologia from connessioni \nwhere municipio in ($municipio) and \nEXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\nposizione in ($sede)\ngroup by (posizione, longitudine, latitudine);\n",
+          "rawSql": "SELECT\n  starttimestamp AS \"time\",\n  sum(upload),\n  posizione\nFROM connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\nGROUP BY posizione, starttimestamp;",
           "refId": "A",
           "select": [
             [
@@ -306,71 +465,60 @@
           ]
         }
       ],
-      "thresholds": "2, 5, 15",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Totale",
-      "transformations": [],
-      "type": "grafana-worldmap-panel",
-      "unitPlural": "GB",
-      "unitSingle": "",
-      "unitSingular": "GB",
+      "title": "Contributo upload per sede",
+      "type": "grafana-piechart-panel",
       "valueName": "total"
     },
     {
-      "circleMaxSize": "5",
-      "circleMinSize": "3",
-      "colors": [
-        "#37872D",
-        "#E0B400",
-        "#FF9830",
-        "#F2495C"
-      ],
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "",
+        "threshold": ""
+      },
       "datasource": "Postgres",
-      "decimals": 2,
-      "esMetric": "Count",
+      "decimals": 1,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
         },
         "overrides": []
       },
+      "fontSize": "80%",
+      "format": "decbytes",
       "gridPos": {
-        "h": 18,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 19
+        "y": 18
       },
-      "hideEmpty": true,
-      "hideZero": true,
-      "id": 6,
-      "initialZoom": "11",
-      "locationData": "table",
-      "mapCenter": "custom",
-      "mapCenterLatitude": "41.9028",
-      "mapCenterLongitude": "12.4964",
-      "maxDataPoints": 1,
-      "mouseWheelZoom": true,
+      "id": 7,
+      "interval": null,
+      "legend": {
+        "header": "Totale",
+        "percentage": true,
+        "percentageDecimals": 2,
+        "show": true,
+        "sideWidth": null,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
       "pluginVersion": "7.1.5",
-      "repeatDirection": "v",
-      "showLegend": true,
-      "stickyLabels": false,
-      "tableQueryOptions": {
-        "geohashField": "geohash",
-        "labelField": "posizione",
-        "latitudeField": "latitudine",
-        "longitudeField": "longitudine",
-        "metricField": "tipologia",
-        "queryType": "coordinates"
-      },
+      "strokeWidth": "1",
       "targets": [
         {
-          "format": "table",
+          "format": "time_series",
           "group": [],
-          "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select posizione, longitudine, latitudine, (max(upload)::float / 1000000000::float) as tipologia from connessioni \nwhere municipio in ($municipio) and \nEXTRACT(EPOCH FROM starttimestamp)*1000 >= $__from and EXTRACT(EPOCH FROM endtimestamp)*1000 <= $__to and\nposizione in ($sede)\ngroup by (posizione, longitudine, latitudine);\n",
+          "rawSql": "SELECT\n  starttimestamp AS \"time\",\n  sum(download),\n  posizione\nFROM connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio) and posizione in ($sede)\nGROUP BY posizione, starttimestamp;",
           "refId": "A",
           "select": [
             [
@@ -392,16 +540,11 @@
           ]
         }
       ],
-      "thresholds": "2, 5, 10",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Picco",
-      "transformations": [],
-      "type": "grafana-worldmap-panel",
-      "unitPlural": "GB",
-      "unitSingle": "",
-      "unitSingular": "GB",
-      "valueName": "max"
+      "title": "Contributo download per sede",
+      "type": "grafana-piechart-panel",
+      "valueName": "total"
     }
   ],
   "refresh": false,
@@ -416,7 +559,6 @@
           "selected": true,
           "tags": [],
           "text": [
-            "Municipio  XII",
             "Municipio I",
             "Municipio II",
             "Municipio III",
@@ -434,7 +576,6 @@
             "Municipio XV"
           ],
           "value": [
-            "Municipio  XII",
             "Municipio I",
             "Municipio II",
             "Municipio III",
@@ -460,11 +601,6 @@
         "multi": true,
         "name": "municipio",
         "options": [
-          {
-            "selected": true,
-            "text": "Municipio  XII",
-            "value": "Municipio  XII"
-          },
           {
             "selected": true,
             "text": "Municipio I",
@@ -1663,8 +1799,8 @@
     ]
   },
   "time": {
-    "from": "now-90d",
-    "to": "now"
+    "from": "2020-08-31T12:13:26.199Z",
+    "to": "2020-08-31T13:17:43.474Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1681,7 +1817,7 @@
     ]
   },
   "timezone": "utc",
-  "title": "Geo dashboard",
-  "uid": "home",
+  "title": "Graph dashboard",
+  "uid": "GkPbiPOMz",
   "version": 1
 }

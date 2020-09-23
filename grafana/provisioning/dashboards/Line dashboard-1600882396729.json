@@ -15,16 +15,16 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 2,
-  "id": 4,
-  "iteration": 1600761791906,
+  "iteration": 1600882290206,
   "links": [
     {
+      "$$hashKey": "object:758",
       "asDropdown": true,
       "icon": "external link",
       "includeVars": true,
       "keepTime": true,
       "tags": [],
-      "targetBlank": true,
+      "targetBlank": false,
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -47,7 +47,7 @@
       "fillGradient": 10,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -76,7 +76,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": "municipio",
-      "repeatDirection": "h",
+      "repeatDirection": "v",
       "scopedVars": {
         "municipio": {
           "selected": true,
@@ -120,9 +120,10 @@
       "timeFrom": null,
       "timeRegions": [
         {
+          "$$hashKey": "object:867",
           "colorMode": "custom",
           "fill": true,
-          "fillColor": "rgba(240, 240, 240, 0.17)",
+          "fillColor": "rgba(240, 240, 240, 0.25)",
           "from": "08:00",
           "line": false,
           "lineColor": "rgba(237, 46, 24, 0.60)",
@@ -130,6 +131,7 @@
           "to": "20:00"
         },
         {
+          "$$hashKey": "object:868",
           "colorMode": "custom",
           "fill": true,
           "fillColor": "rgba(0, 35, 161, 0.35)",
@@ -157,6 +159,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:839",
           "format": "decbytes",
           "label": null,
           "logBase": 10,
@@ -165,6 +168,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:840",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -195,9 +199,9 @@
       "fillGradient": 10,
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
+        "w": 24,
+        "x": 0,
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 3,
@@ -224,158 +228,8 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatDirection": "h",
-      "repeatIteration": 1600761791906,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "municipio": {
-          "selected": true,
-          "text": "Municipio II",
-          "value": "Municipio II"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  $__time(starttimestamp),\n  download as \"Download\",\n  upload as \"Upload\"\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio)\ngroup by starttimestamp, download, upload\norder by starttimestamp;",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [
-        {
-          "colorMode": "custom",
-          "fill": true,
-          "fillColor": "rgba(240, 240, 240, 0.17)",
-          "from": "08:00",
-          "line": false,
-          "lineColor": "rgba(237, 46, 24, 0.60)",
-          "op": "time",
-          "to": "20:00"
-        },
-        {
-          "colorMode": "custom",
-          "fill": true,
-          "fillColor": "rgba(0, 35, 161, 0.35)",
-          "from": "20:00",
-          "line": false,
-          "lineColor": "rgba(237, 46, 24, 0.60)",
-          "op": "time",
-          "to": "08:00"
-        }
-      ],
-      "timeShift": null,
-      "title": "Andamento download/upload $municipio",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 10,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Postgres",
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 10,
-      "fillGradient": 10,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 8
-      },
-      "hiddenSeries": false,
-      "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "hideEmpty": true,
-        "hideZero": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": true,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxDataPoints": 645,
-      "maxPerRow": 2,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pluginVersion": "7.1.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "h",
-      "repeatIteration": 1600761791906,
+      "repeatDirection": "v",
+      "repeatIteration": 1600882290206,
       "repeatPanelId": 2,
       "scopedVars": {
         "municipio": {
@@ -420,9 +274,10 @@
       "timeFrom": null,
       "timeRegions": [
         {
+          "$$hashKey": "object:867",
           "colorMode": "custom",
           "fill": true,
-          "fillColor": "rgba(240, 240, 240, 0.17)",
+          "fillColor": "rgba(240, 240, 240, 0.25)",
           "from": "08:00",
           "line": false,
           "lineColor": "rgba(237, 46, 24, 0.60)",
@@ -430,6 +285,7 @@
           "to": "20:00"
         },
         {
+          "$$hashKey": "object:868",
           "colorMode": "custom",
           "fill": true,
           "fillColor": "rgba(0, 35, 161, 0.35)",
@@ -457,6 +313,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:839",
           "format": "decbytes",
           "label": null,
           "logBase": 10,
@@ -465,6 +322,161 @@
           "show": true
         },
         {
+          "$$hashKey": "object:840",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Postgres",
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 10,
+      "fillGradient": 10,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxDataPoints": 645,
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": null,
+      "repeatDirection": "v",
+      "repeatIteration": 1600882290206,
+      "repeatPanelId": 2,
+      "scopedVars": {
+        "municipio": {
+          "selected": true,
+          "text": "Municipio V",
+          "value": "Municipio V"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__time(starttimestamp),\n  download as \"Download\",\n  upload as \"Upload\"\nFROM\n  connessioni\nWHERE\n  $__timeFilter(starttimestamp) and municipio in ($municipio)\ngroup by starttimestamp, download, upload\norder by starttimestamp;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [
+        {
+          "$$hashKey": "object:867",
+          "colorMode": "custom",
+          "fill": true,
+          "fillColor": "rgba(240, 240, 240, 0.25)",
+          "from": "08:00",
+          "line": false,
+          "lineColor": "rgba(237, 46, 24, 0.60)",
+          "op": "time",
+          "to": "20:00"
+        },
+        {
+          "$$hashKey": "object:868",
+          "colorMode": "custom",
+          "fill": true,
+          "fillColor": "rgba(0, 35, 161, 0.35)",
+          "from": "20:00",
+          "line": false,
+          "lineColor": "rgba(237, 46, 24, 0.60)",
+          "op": "time",
+          "to": "08:00"
+        }
+      ],
+      "timeShift": null,
+      "title": "Andamento download/upload $municipio",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:839",
+          "format": "decbytes",
+          "label": null,
+          "logBase": 10,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:840",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -492,13 +504,13 @@
           "tags": [],
           "text": [
             "Municipio I",
-            "Municipio II",
-            "Municipio III"
+            "Municipio III",
+            "Municipio V"
           ],
           "value": [
             "Municipio I",
-            "Municipio II",
-            "Municipio III"
+            "Municipio III",
+            "Municipio V"
           ]
         },
         "datasource": "Postgres",
@@ -515,7 +527,7 @@
             "value": "Municipio I"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Municipio II",
             "value": "Municipio II"
           },
@@ -535,7 +547,7 @@
             "value": "Municipio IX"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Municipio V",
             "value": "Municipio V"
           },
@@ -619,5 +631,5 @@
   "timezone": "utc",
   "title": "Line dashboard",
   "uid": "prova",
-  "version": 10
+  "version": 1
 }

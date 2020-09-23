@@ -15,15 +15,16 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 2,
-  "iteration": 1600764147024,
+  "iteration": 1600882135123,
   "links": [
     {
+      "$$hashKey": "object:617",
       "asDropdown": true,
       "icon": "external link",
       "includeVars": true,
       "keepTime": true,
       "tags": [],
-      "targetBlank": true,
+      "targetBlank": false,
       "title": "Dashboards",
       "type": "dashboards"
     }
@@ -82,7 +83,8 @@
       "id": 2,
       "interval": null,
       "legend": {
-        "percentage": false,
+        "header": "Totale",
+        "percentage": true,
         "show": true,
         "values": true
       },
@@ -302,7 +304,7 @@
         },
         "overrides": []
       },
-      "fill": 10,
+      "fill": 0,
       "fillGradient": 10,
       "gridPos": {
         "h": 9,
@@ -333,8 +335,8 @@
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
-      "pointradius": 2,
-      "points": false,
+      "pointradius": 1,
+      "points": true,
       "renderer": "flot",
       "repeat": "municipio",
       "repeatDirection": "v",
@@ -567,7 +569,7 @@
         },
         "overrides": []
       },
-      "fill": 10,
+      "fill": 0,
       "fillGradient": 10,
       "gridPos": {
         "h": 9,
@@ -598,12 +600,12 @@
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
-      "pointradius": 2,
-      "points": false,
+      "pointradius": 1,
+      "points": true,
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1600764147024,
+      "repeatIteration": 1600882135123,
       "repeatPanelId": 8,
       "scopedVars": {
         "municipio": {
@@ -738,7 +740,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1600764147024,
+      "repeatIteration": 1600882135123,
       "repeatPanelId": 27,
       "scopedVars": {
         "municipio": {
@@ -836,7 +838,7 @@
         },
         "overrides": []
       },
-      "fill": 10,
+      "fill": 0,
       "fillGradient": 10,
       "gridPos": {
         "h": 9,
@@ -867,12 +869,12 @@
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
-      "pointradius": 2,
-      "points": false,
+      "pointradius": 1,
+      "points": true,
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1600764147024,
+      "repeatIteration": 1600882135123,
       "repeatPanelId": 8,
       "scopedVars": {
         "municipio": {
@@ -1007,7 +1009,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1600764147024,
+      "repeatIteration": 1600882135123,
       "repeatPanelId": 27,
       "scopedVars": {
         "municipio": {
@@ -1232,5 +1234,5 @@
   "timezone": "utc",
   "title": "Servizi Dashboard",
   "uid": "sWOmVjdMk",
-  "version": 2
+  "version": 1
 }
