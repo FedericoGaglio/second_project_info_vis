@@ -1681,7 +1681,7 @@
     ]
   },
   "timezone": "utc",
-  "title": "Geo dashboard",
-  "uid": "homee",
-  "version": 7
+  "title": "Gauge dashboard",
+  "uid": "pippo",
+  "version": 1
 }
